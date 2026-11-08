@@ -5,7 +5,7 @@ Run:  python3 _src/build.py   (from the repo root)
 Course names, level names and lesson names come from the app's own string
 catalog, so the site always says exactly what the app says.
 """
-import html, json, importlib, os, re, sys, urllib.parse
+import hashlib, html, json, importlib, os, re, sys, urllib.parse
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 SITE = os.path.dirname(HERE)                    # repo root, served as the site
@@ -46,6 +46,11 @@ def fit(word, code):
 
 MAIL = 'mailto:helpyoutofeel@gmail.com'
 
+def icon(name):
+    """Icon address tied to the file's content: Cloudflare lets browsers keep images for hours."""
+    with open(os.path.join(SITE, 'assets', name), 'rb') as f:
+        return f'/assets/{name}?v={hashlib.md5(f.read()).hexdigest()[:8]}'
+
 def head_tags(url, hl, ogl, code, title, desc, alt, image=True):
     og = f"""<meta property="og:image" content="{BASE}assets/og-{code}.jpg">
 <meta property="og:image:width" content="1200">
@@ -67,14 +72,14 @@ def head_tags(url, hl, ogl, code, title, desc, alt, image=True):
 <meta property="og:description" content="{a(desc)}">
 <meta property="og:url" content="{url}">
 {og}<meta property="og:locale" content="{ogl}">
-<link rel="icon" href="/assets/icon-64.png" type="image/png">
-<link rel="apple-touch-icon" href="/assets/icon-180.png">
+<link rel="icon" href="{icon('icon-64.png')}" type="image/png">
+<link rel="apple-touch-icon" href="{icon('icon-180.png')}">
 <link rel="stylesheet" href="/style.css">
 """
 
 def header(code, folder, native, d, page=''):
     return f"""<header class="top">
-  <a class="brand" href="/{folder}"><img src="/assets/icon-64.png" alt="" width="32" height="32"><span>Snowboarding</span></a>
+  <a class="brand" href="/{folder}"><img src="{icon('icon-64.png')}" alt="" width="32" height="32"><span>Snowboarding</span></a>
   <nav><a href="/{folder}support.html">{e(d['foot_support'])}</a><a href="/{folder}privacy.html">{e(d['foot_privacy'])}</a>
   <details class="langs"><summary aria-label="{a(d['lang_label'])}">{e(native)}</summary><div>{lang_menu(code, page)}</div></details></nav>
 </header>
