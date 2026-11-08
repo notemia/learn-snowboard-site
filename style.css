@@ -48,8 +48,7 @@ a { color: inherit; }
 h1 { grid-area: name; align-self: end; font: 600 clamp(1.375rem, 2.4vw, 2.25rem)/1.15 "Sofia Text", -apple-system, sans-serif; }
 h1 span { display: block; font: 800 min(calc(var(--fit) * .58), 11rem)/.92 var(--display); letter-spacing: -.012em; margin-bottom: .08em; }
 .pitch { grid-area: pitch; max-width: 30rem; margin-top: 1.1rem; }
-.pitch .btn { margin: 1.1rem 0 .6rem; }
-.soon { font-size: 1rem; }
+.pitch .btn { margin-top: 1.1rem; }
 .hero video { grid-area: video; align-self: center; height: min(74svh, 700px); width: auto; aspect-ratio: 640 / 1312; border-radius: 26px; background: var(--shadow); box-shadow: 0 18px 48px #14223840; }
 
 /* The run: the track and the board are added by app.js */
@@ -59,7 +58,7 @@ h1 span { display: block; font: 800 min(calc(var(--fit) * .58), 11rem)/.92 var(-
 .groove { fill: none; stroke: var(--shadow); stroke-width: 24; stroke-linecap: round; opacity: .7; }
 .edge { fill: none; stroke-width: 4.5; stroke-linecap: butt; }
 .edge.toe { stroke: var(--toe); } .edge.heel { stroke: var(--heel); }
-.gate, .courses { position: relative; z-index: 1; }
+.gate, .shots { position: relative; z-index: 1; }
 .gate { padding: clamp(1.25rem, 3vw, 2.5rem) var(--gutter) clamp(1.5rem, 3vw, 2.5rem); }
 .in { width: min(70%, 54rem); }
 h2 { font: 800 clamp(2.5rem, 5vw, 4.25rem)/1 var(--display); text-wrap: balance; margin-bottom: .2em; }
@@ -71,12 +70,8 @@ h2 { font: 800 clamp(2.5rem, 5vw, 4.25rem)/1 var(--display); text-wrap: balance;
 .levels li:nth-child(n+5) .pole { background: #d13333; }
 .levels li:nth-child(7) .pole { background: var(--ink); }
 
-.courses { display: grid; grid-auto-flow: column; grid-auto-columns: minmax(11rem, 1fr); gap: 6px; overflow-x: auto; scroll-snap-type: x proximity; background: var(--snow); padding-bottom: 1.25rem; }
-.courses figure { scroll-snap-align: start; }
-.courses img { width: 100%; aspect-ratio: 4 / 3; object-fit: cover; object-position: center 70%; }
-.courses figcaption { padding: .5rem .75rem 0; font-size: .9375rem; line-height: 1.25; color: var(--ink-2); }
-.courses span { display: block; }
-.courses strong { display: block; color: var(--ink); font: 700 1.625rem/1.05 var(--display); }
+.shots { display: grid; grid-auto-flow: column; grid-auto-columns: minmax(11rem, 1fr); gap: 12px; overflow-x: auto; scroll-snap-type: x proximity; padding: 0 var(--gutter) 1.5rem; }
+.shots img { width: 100%; aspect-ratio: 660 / 1120; object-fit: cover; object-position: top; border-radius: 16px; scroll-snap-align: center; }
 
 footer { position: relative; z-index: 2; display: flex; justify-content: space-between; gap: 1rem 1.5rem; flex-wrap: wrap; padding: 1.1rem var(--gutter) 1.4rem; background: var(--night); color: var(--shadow); }
 footer small { font-size: .9375rem; max-width: 40rem; }
@@ -105,7 +100,6 @@ footer nav { display: flex; gap: 1.5rem; font-size: .9375rem; }
   h1 { font-size: 1.375rem; }
   h1 span { font-size: min(var(--fit), 8.5rem); }
   .pitch { margin-top: .8rem; font-size: 1rem; }
-  .soon { font-size: .875rem; }
   .pitch .btn { padding: .65em 1.05em; font-size: 1rem; }
   .hero video { align-self: start; margin-top: .8rem; height: auto; width: 100%; border-radius: 18px; }
   .groove { stroke-width: 14; }
@@ -114,7 +108,7 @@ footer nav { display: flex; gap: 1.5rem; font-size: .9375rem; }
   .in { width: 100%; }
   .levels { grid-template-columns: 1fr 1fr; gap: .45rem .6rem; font-size: 1rem; }
   .pole { width: 2rem; height: 2rem; font-size: 1.25rem; }
-  .courses { grid-auto-columns: 44vw; padding-right: var(--gutter); }
+  .shots { grid-auto-columns: 44vw; gap: 8px; }
 }
 @media (prefers-reduced-motion: reduce) {
   .btn, .rows summary::after { transition: none; }

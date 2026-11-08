@@ -32,8 +32,6 @@ STR = json.load(open(CATALOG, encoding='utf-8'))['strings']
 def app(key, ck):
     return STR[key]['localizations'][ck]['stringUnit']['value']
 
-COURSES = [('longRun', 'course-long-run'), ('pyramid', 'course-pyramid'), ('parkPipe', 'course-park-pipe'),
-           ('powderGlades', 'course-powder-glades'), ('couloir', 'course-couloir')]
 LEVELS = [('level.safety', [17, 18]), ('level1', [11, 10, 2]), ('level2', [12, 6]), ('level.lifts', [20, 21]),
           ('level3', [1, 13, 4, 8, 19]), ('level4', [5, 14, 7, 15]), ('level5', [3, 9, 22, 23, 16])]
 assert sum(len(l) for _, l in LEVELS) == 23
@@ -107,10 +105,9 @@ def build(code, folder, hl, ogl, ck, native, d):
               "screenshot": [BASE + "assets/game.jpg"],
               "author": {"@type": "Person", "name": "Vladimir Dyagay"}}
     ld = json.dumps(app_ld, ensure_ascii=False).replace('</', '<\\/')
-    courses = ''.join(
-        f'<figure><img src="/assets/{img}.jpg" alt="{a(t)}" width="720" height="1080" loading="lazy">'
-        f'<figcaption><span>{e(app(f"mountain.{key}.place", ck))}</span><strong>{e(app(f"mountain.{key}.run", ck))}</strong></figcaption></figure>'
-        for (key, img), t in zip(COURSES, d['courses_alt']))
+    # Lessons, from the simplest to the hardest. The headlines are part of the images.
+    lessons = [(7, d['trio'][0][3]), (8, d['trio'][1][3]), (1, d['watch_aria']), (6, d['early_alt']), (5, d['ride_aria'])]
+    shots = ''.join(f'<img src="/assets/shots/{code}/{n:02d}.webp" alt="{a(t)}" width="660" height="1434" loading="lazy">' for n, t in lessons)
     levels = ''.join(f'<li><b class="pole">{i}</b>{e(app(stem + ".title", ck))}</li>' for i, (stem, _) in enumerate(LEVELS, 1))
     return head_tags(url, hl, ogl, code, d['title'], d['desc'], alternates()) + f"""<script type="application/ld+json">{ld}</script>
 </head>
@@ -122,7 +119,6 @@ def build(code, folder, hl, ogl, ck, native, d):
   <div class="pitch">
     <p>{e(d['sub'])}</p>
     <a class="btn" href="{a(mail)}">{e(d['cta2'])}</a>
-    <p class="soon">{e(d['soon'])}</p>
   </div>
   <video data-loop muted loop playsinline preload="auto" poster="/assets/game.jpg" aria-label="{a(d['hero_aria'])}" width="640" height="1312"><source src="/assets/game.mp4" type="video/mp4"></video>
 </div>
@@ -131,7 +127,7 @@ def build(code, folder, hl, ogl, ck, native, d):
     <h2>{e(d['c_h2'])}</h2><p>{e(d['c_lead'])}</p>
     <ol class="levels">{levels}</ol>
   </div></section>
-  <div class="courses" tabindex="0" aria-label="{a(d['m_h2'])}">{courses}</div>
+  <div class="shots" tabindex="0" aria-label="{a(d['g_h2'])}">{shots}</div>
 </div>
 </main>
 """ + footer(folder, d)
@@ -161,10 +157,10 @@ def build_doc(kind, code, folder, hl, ogl, native, d, X):
 """ + footer(folder, d)
 
 def check(code, d):
-    need = ['title','desc','lang_label','h1a','h1b','sub','cta2','notify_subject','soon','hero_aria','m_h2','courses_alt','c_h2','c_lead','foot','foot_support','foot_privacy']
+    need = ['title','desc','lang_label','h1a','h1b','sub','cta2','notify_subject','hero_aria','watch_aria','early_alt','ride_aria','trio','g_h2','c_h2','c_lead','foot','foot_support','foot_privacy']
     miss = [k for k in need if k not in d]
     assert not miss, (code, miss)
-    assert len(d['courses_alt']) == 5
+    assert len(d['trio']) == 3
 
 def lang_menu(code, page=''):
     return ''.join(f'<a href="/{f2}{page}" hreflang="{h2}" lang="{h2}"' + (' aria-current="true"' if c2 == code else '') + f'>{n2}</a>'
