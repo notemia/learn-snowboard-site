@@ -57,7 +57,7 @@
   // The track swings in the free strip on the right, one turn every few hundred pixels.
   function apexes(W, H) {
     var phone = W <= 760;
-    var near = phone ? W - 44 : W * 0.78, far = phone ? W - 12 : W * 0.95;
+    var near = phone ? W - 44 : W * 0.915, far = phone ? W - 12 : W * 0.975;
     var step = phone ? 300 : 230, pts = [], right = false;
     for (var y = 24; y < H - step / 2; y += step, right = !right) pts.push({ x: right ? far : near, y: y, toe: right });
     pts.push({ x: right ? far : near, y: H, toe: right });

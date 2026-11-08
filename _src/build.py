@@ -105,9 +105,10 @@ def build(code, folder, hl, ogl, ck, native, d):
               "screenshot": [BASE + "assets/game.jpg"],
               "author": {"@type": "Person", "name": "Vladimir Dyagay"}}
     ld = json.dumps(app_ld, ensure_ascii=False).replace('</', '<\\/')
-    # Lessons, from the simplest to the hardest. The headlines are part of the images.
-    lessons = [(7, d['trio'][0][3]), (8, d['trio'][1][3]), (1, d['watch_aria']), (6, d['early_alt']), (5, d['ride_aria'])]
-    shots = ''.join(f'<img src="/assets/shots/{code}/{n:02d}.webp" alt="{a(t)}" width="660" height="1434" loading="lazy">' for n, t in lessons)
+    # Lessons, from the simplest to the hardest: the 3D scene and the lesson's own name.
+    scenes = ''.join(
+        f'<figure><img src="/assets/lessons/{code}/{img}.webp" alt="" width="560" height="420" loading="lazy"><figcaption>{e(app(f"lesson{n}.skill", ck))}</figcaption></figure>'
+        for img, n in (('falling', 18), ('surfaceLift', 20), ('edgeRelease', 1), ('linkedTurns', 15), ('absorb', 9)))
     levels = ''.join(f'<li><b class="pole">{i}</b>{e(app(stem + ".title", ck))}</li>' for i, (stem, _) in enumerate(LEVELS, 1))
     return head_tags(url, hl, ogl, code, d['title'], d['desc'], alternates()) + f"""<script type="application/ld+json">{ld}</script>
 </head>
@@ -124,10 +125,10 @@ def build(code, folder, hl, ogl, ck, native, d):
 </div>
 <div class="run" id="run">
   <section class="gate"><div class="in">
-    <h2>{e(d['c_h2'])}</h2><p>{e(d['c_lead'])}</p>
+    <h2>{e(d['c_h2'])}</h2>
     <ol class="levels">{levels}</ol>
   </div></section>
-  <div class="shots" tabindex="0" aria-label="{a(d['g_h2'])}">{shots}</div>
+  <div class="scenes" tabindex="0" aria-label="{a(d['g_h2'])}">{scenes}</div>
 </div>
 </main>
 """ + footer(folder, d)
@@ -157,10 +158,9 @@ def build_doc(kind, code, folder, hl, ogl, native, d, X):
 """ + footer(folder, d)
 
 def check(code, d):
-    need = ['title','desc','lang_label','h1a','h1b','sub','cta2','notify_subject','hero_aria','watch_aria','early_alt','ride_aria','trio','g_h2','c_h2','c_lead','foot','foot_support','foot_privacy']
+    need = ['title','desc','lang_label','h1a','h1b','sub','cta2','notify_subject','hero_aria','g_h2','c_h2','foot','foot_support','foot_privacy']
     miss = [k for k in need if k not in d]
     assert not miss, (code, miss)
-    assert len(d['trio']) == 3
 
 def lang_menu(code, page=''):
     return ''.join(f'<a href="/{f2}{page}" hreflang="{h2}" lang="{h2}"' + (' aria-current="true"' if c2 == code else '') + f'>{n2}</a>'
