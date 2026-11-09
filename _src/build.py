@@ -38,9 +38,9 @@ STR = json.load(open(CATALOG, encoding='utf-8'))['strings']
 def app(key, ck):
     return STR[key]['localizations'][ck]['stringUnit']['value']
 
-LEVELS = [('level.safety', [17, 18]), ('level1', [11, 10, 2]), ('level2', [12, 6]), ('level.lifts', [20, 21]),
+LEVELS = [('level.safety', [17, 18]), ('level1', [11, 24, 10, 2, 25]), ('level2', [12, 6]), ('level.lifts', [20, 21]),
           ('level3', [1, 13, 4, 8, 19]), ('level4', [5, 14, 7, 15]), ('level5', [3, 9, 22, 23, 16])]
-assert sum(len(l) for _, l in LEVELS) == 23
+assert sum(len(l) for _, l in LEVELS) == 25
 
 e = lambda s: html.escape(s, quote=False)
 a = lambda s: html.escape(s, quote=True)
