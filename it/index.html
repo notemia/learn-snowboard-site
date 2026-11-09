@@ -42,35 +42,51 @@
 
 <main>
 <div class="hero">
-  <h1><span style="--fit:14.1vw">Snowboard da zero</span>Capisci i movimenti prima della tua prima discesa</h1>
+  <h1><span style="--fit:14.1vw">Snowboard da zero</span>Capisci i movimenti prima di scendere in pista</h1>
   <div class="pitch">
-    <p>Guardare e leggere aiutano a capire la tecnica. Qui in più guidi tu il rider: provi un movimento, vedi il risultato e puoi cambiare qualcosa. Nell’apprendimento motorio si usa proprio questo ciclo: azione, riscontro, nuovo tentativo. Aiuta a scomporre il movimento; a farlo col corpo impari poi sulla neve.</p>
-    <p>Sposta il peso, cambia lamina, piega le gambe e vedi subito come reagisce la tavola: dove ha girato, come sono cambiate velocità e direzione. Puoi rallentare il movimento, provare in modi diversi e confrontare il risultato. Così i dettagli diventano più chiari: cosa fare, perché, come si muove il corpo e come reagisce la tavola.</p>
+    <p>Qui il rider lo guidi tu: sposta il peso, cambia lamina e vedi subito come reagisce la tavola.</p>
     <a class="btn" href="mailto:helpyoutofeel@gmail.com?subject=Snowboard%3A%20avvisatemi%20quando%20esce%20l%E2%80%99app">Avvisami all’uscita</a>
   </div>
   <video data-loop muted loop playsinline preload="metadata" poster="/assets/game.jpg?v=398fdb6f" aria-label="Gioco: una rider in 3D collega curve in conduzione sulla pista e poi scende in switch." width="640" height="1312"><source src="/assets/game.mp4?v=afc510f1" type="video/mp4"></video>
 </div>
 <div class="run" id="run">
-  <div class="columns">
-    <div class="copy">
-      <section class="who">
-        <h2>Per chi è</h2>
-        <dl><div><dt>Principianti</dt><dd>Arrivare in montagna con meno paura, capendo già le basi e la meccanica della tavola e sapendo a cosa fare attenzione nel corpo e nei movimenti.</dd></div><div><dt>Chi sa già scendere</dt><dd>Mettere ordine nella tua esperienza e notare gli errori: i movimenti sbagliati diventano abitudini e smettiamo di accorgercene. Capire le curve concatenate e le basi del carving, e intanto fare qualche discesa nel simulatore.</dd></div><div><dt>Chi vuole risparmiare tempo</dt><dd>Non spendere ore costose col maestro per la teoria di base.</dd></div></dl>
-      </section>
-      <section class="plan">
-        <h2>23 lezioni in 7 livelli</h2>
-        <p class="lead">23 lezioni in sequenza ti portano dalla posizione e dalle regole di sicurezza alle curve sicure e ai primi passi nel carving. In pista arrivi sapendo come muoverti e a cosa fare attenzione mentre ti alleni.</p>
-        <ol class="levels"><li><b class="pole">1</b><span>Prima la sicurezza</span></li><li><button type="button" data-at="0"><b class="pole">2</b><span>Le basi</span></button></li><li><button type="button" data-at="9.9"><b class="pole">3</b><span>Scivolare</span></button></li><li><button type="button" data-at="15.1"><b class="pole">4</b><span>Impianti</span></button></li><li><button type="button" data-at="26.2"><b class="pole">5</b><span>Controllo</span></button></li><li><button type="button" data-at="37.6"><b class="pole">6</b><span>Curve</span></button></li><li><button type="button" data-at="61.7"><b class="pole">7</b><span>In pista</span></button></li></ol>
-        <p class="game">E per fissare tutto c’è il simulatore: piste diverse in paesi diversi.</p>
-      </section>
+<section class="why">
+  <div class="why-in">
+    <div class="why-text">
+      <h2>Cosa cambia rispetto alle videolezioni</h2>
+      <p>Guardare e leggere aiutano a capire la tecnica. Qui in più guidi tu il rider: provi un movimento, vedi il risultato e puoi cambiare qualcosa. Nell’apprendimento motorio si usa proprio questo ciclo: azione, feedback, nuovo tentativo. Aiuta a scomporre il movimento; a farlo col corpo impari poi sulla neve.</p>
+      <p>Sposta il peso, cambia lamina, piega le gambe e vedi subito come reagisce la tavola: dove ha girato, come sono cambiate velocità e direzione. Puoi rallentare il movimento, provare in modi diversi e confrontare il risultato. Così i dettagli diventano più chiari: cosa fare, perché, come si muove il corpo e come reagisce la tavola.</p>
     </div>
-    <div class="screen" role="group" aria-label="Uno sguardo all’interno">
-      <video data-loop data-film muted loop playsinline preload="metadata" poster="/assets/film.jpg?v=10ff164a" width="640" height="1312"><source src="/assets/film.mp4?v=b559445f" type="video/mp4"></video>
-      <p class="stage">Le basi</p>
-      <p class="line">Senti l’appoggio attraverso gli scarponi</p>
-    </div>
+    <figure class="try">
+      <figcaption>Prova qui: trascina la pallina</figcaption>
+      <div class="deck" id="deck">
+        <span class="dir toes">punte</span><span class="dir heels">talloni</span><span class="dir nose">nose</span><span class="dir tail">tail</span>
+        <svg class="board" viewBox="0 0 520 130" aria-hidden="true"><path class="sheet" d="M58 12H462C500 12 512 42 512 65S500 118 462 118H58C20 118 8 88 8 65S20 12 58 12Z"/><path class="edge-toe" d="M58 12H462"/><path class="edge-heel" d="M58 118H462"/><rect class="stripe" x="82" y="30" width="12" height="70" rx="3"/><rect class="stripe" x="426" y="30" width="12" height="70" rx="3"/><rect class="bind" x="148" y="34" width="44" height="62" rx="12"/><rect class="bind" x="328" y="34" width="44" height="62" rx="12"/></svg>
+        <button type="button" class="ball" id="ball" aria-label="Il tuo peso sulla tavola. Trascina la pallina o spostala con le frecce della tastiera."></button>
+      </div>
+      <p class="say" id="say" aria-live="polite" data-flat="Tavola in piano, peso al centro." data-nose="Tavola in piano, peso sul piede anteriore: il nose punta verso la linea di massima pendenza." data-toes="Sulle punte: tiene la lamina di punta." data-heels="Sui talloni: tiene la lamina di tacco." data-back="Peso indietro: il tail molla. Resta sopra il piede anteriore quando il nose scende.">Tavola in piano, peso al centro.</p>
+      <small>Un modello semplificato per questa pagina. Nell’app guida il rider.</small>
+    </figure>
+  </div>
+</section>
+<section class="who">
+  <h2>Per chi è</h2>
+  <dl><div><dt>Principianti</dt><dd>Arrivare in montagna con meno paura, capendo già le basi e la meccanica della tavola e sapendo a cosa fare attenzione nel corpo e nei movimenti.</dd></div><div><dt>Chi sa già scendere</dt><dd>Mettere ordine nella tua esperienza e notare gli errori: i movimenti sbagliati diventano abitudini e smettiamo di accorgercene. Capire le curve concatenate e le basi del carving, e intanto fare qualche discesa nel simulatore.</dd></div><div><dt>Chi vuole risparmiare tempo</dt><dd>Non spendere ore costose col maestro per la teoria di base.</dd></div></dl>
+</section>
+<section class="columns">
+  <div class="plan">
+    <h2>23 lezioni in 7 livelli</h2>
+    <p class="lead">23 lezioni in sequenza ti portano dalla posizione e dalle regole di sicurezza alle curve sicure e ai primi passi nel carving. In pista arrivi sapendo come muoverti e a cosa fare attenzione mentre ti alleni.</p>
+    <ol class="levels"><li><b class="pole">1</b><span>Prima la sicurezza</span></li><li><button type="button" data-at="0"><b class="pole">2</b><span>Le basi</span></button></li><li><button type="button" data-at="9.9"><b class="pole">3</b><span>Scivolare</span></button></li><li><button type="button" data-at="15.1"><b class="pole">4</b><span>Impianti</span></button></li><li><button type="button" data-at="26.2"><b class="pole">5</b><span>Controllo</span></button></li><li><button type="button" data-at="37.6"><b class="pole">6</b><span>Curve</span></button></li><li><button type="button" data-at="61.7"><b class="pole">7</b><span>In pista</span></button></li></ol>
+    <p class="game">E per fissare tutto c’è il simulatore: piste diverse in paesi diversi.</p>
+  </div>
+  <div class="screen" role="group" aria-label="Uno sguardo all’interno">
+    <video data-loop data-film muted loop playsinline preload="metadata" poster="/assets/film.jpg?v=10ff164a" width="640" height="1312"><source src="/assets/film.mp4?v=b559445f" type="video/mp4"></video>
+    <p class="stage">Le basi</p>
+    <p class="line">Senti l’appoggio attraverso gli scarponi</p>
   </div>
   <script type="application/json" id="film-lines">[[0, "Senti l’appoggio attraverso gli scarponi"], [4.2, "Spinta corta, scivola sulla tavola"], [9.9, "Chiudi lo scivolamento con un arco"], [15.1, "Alla linea d’imbarco"], [16.6, "Guarda oltre la spalla"], [18.0, "Siediti quando arriva"], [19.3, "Schiena allo schienale, tavola dritta"], [20.5, "Alza la barra al cartello"], [22.3, "Tavola sulla neve, piede libero sul pad"], [23.8, "Alzati"], [25.0, "Dritto giù dalla rampa"], [26.2, "Lascia andare la lamina poco a poco"], [30.9, "Guida la tavola con il peso"], [37.6, "Quasi una curva, su una sola lamina"], [39.23, "Peso verso il piede anteriore"], [40.83, "Piede anteriore piatto, il nose scende"], [41.93, "Peso al centro, la tavola rientra"], [45.1, "Da un arco all’altro"], [46.73, "Guarda dove vai dopo"], [47.93, "Peso verso il piede anteriore"], [49.53, "Piede anteriore piatto, il nose scende"], [51.83, "Tavola piatta, nose in linea di massima pendenza"], [53.63, "Ginocchio e anca anteriori guidano l’arco"], [55.6, "Alleggerisci la tavola: verso l’alto o verso il basso"], [57.28, "Distenditi"], [59.1, "Piega nel nuovo arco"], [61.7, "Con l’altro piede davanti"], [69.4, "Senti la tavola attraverso l’iPhone"]]</script>
+</section>
 </div>
 </main>
 <footer>

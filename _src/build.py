@@ -148,33 +148,49 @@ def build(code, folder, hl, ogl, ck, native, d):
 <div class="hero">
   <h1><span style="--fit:{fit(name, code)}vw">{e(name)}</span>{e(d['h1b'])}</h1>
   <div class="pitch">
-    <p>{e(d['sub'])}</p>
-    <p>{e(d['sub2'])}</p>
+    <p>{e(d['short'])}</p>
     <a class="btn" href="{a(mail)}">{e(d['cta2'])}</a>
   </div>
   <video data-loop muted loop playsinline preload="metadata" poster="{icon('game.jpg')}" aria-label="{a(d['hero_aria'])}" width="640" height="1312"><source src="{icon('game.mp4')}" type="video/mp4"></video>
 </div>
 <div class="run" id="run">
-  <div class="columns">
-    <div class="copy">
-      <section class="who">
-        <h2>{e(d['who_h'])}</h2>
-        <dl>{who}</dl>
-      </section>
-      <section class="plan">
-        <h2>{e(d['c_h2'])}</h2>
-        <p class="lead">{e(d['c_lead'])}</p>
-        <ol class="levels">{levels}</ol>
-        <p class="game">{e(d['game_line'])}</p>
-      </section>
+<section class="why">
+  <div class="why-in">
+    <div class="why-text">
+      <h2>{e(d['why_h'])}</h2>
+      <p>{e(d['sub'])}</p>
+      <p>{e(d['sub2'])}</p>
     </div>
-    <div class="screen" role="group" aria-label="{a(d['g_h2'])}">
-      <video data-loop data-film muted loop playsinline preload="metadata" poster="{icon('film.jpg')}" width="640" height="1312"><source src="{icon('film.mp4')}" type="video/mp4"></video>
-      <p class="stage">{first_stage}</p>
-      <p class="line">{first_line}</p>
-    </div>
+    <figure class="try">
+      <figcaption>{e(d['t_try'])}</figcaption>
+      <div class="deck" id="deck">
+        <span class="dir toes">{e(d['t_toes'])}</span><span class="dir heels">{e(d['t_heels'])}</span><span class="dir nose">{e(d['t_nose'])}</span><span class="dir tail">{e(d['t_tail'])}</span>
+        <svg class="board" viewBox="0 0 520 130" aria-hidden="true"><path class="sheet" d="M58 12H462C500 12 512 42 512 65S500 118 462 118H58C20 118 8 88 8 65S20 12 58 12Z"/><path class="edge-toe" d="M58 12H462"/><path class="edge-heel" d="M58 118H462"/><rect class="stripe" x="82" y="30" width="12" height="70" rx="3"/><rect class="stripe" x="426" y="30" width="12" height="70" rx="3"/><rect class="bind" x="148" y="34" width="44" height="62" rx="12"/><rect class="bind" x="328" y="34" width="44" height="62" rx="12"/></svg>
+        <button type="button" class="ball" id="ball" aria-label="{a(d['t_ball'])}"></button>
+      </div>
+      <p class="say" id="say" aria-live="polite" data-flat="{a(d['pad']['flat'])}" data-nose="{a(d['pad']['nose'])}" data-toes="{a(d['pad']['toes'])}" data-heels="{a(d['pad']['heels'])}" data-back="{a(d['pad']['back'])}">{e(d['pad']['flat'])}</p>
+      <small>{e(d['t_hint'])}</small>
+    </figure>
+  </div>
+</section>
+<section class="who">
+  <h2>{e(d['who_h'])}</h2>
+  <dl>{who}</dl>
+</section>
+<section class="columns">
+  <div class="plan">
+    <h2>{e(d['c_h2'])}</h2>
+    <p class="lead">{e(d['c_lead'])}</p>
+    <ol class="levels">{levels}</ol>
+    <p class="game">{e(d['game_line'])}</p>
+  </div>
+  <div class="screen" role="group" aria-label="{a(d['g_h2'])}">
+    <video data-loop data-film muted loop playsinline preload="metadata" poster="{icon('film.jpg')}" width="640" height="1312"><source src="{icon('film.mp4')}" type="video/mp4"></video>
+    <p class="stage">{first_stage}</p>
+    <p class="line">{first_line}</p>
   </div>
   <script type="application/json" id="film-lines">{lines}</script>
+</section>
 </div>
 </main>
 """ + footer(folder, d)
@@ -204,7 +220,7 @@ def build_doc(kind, code, folder, hl, ogl, native, d, X):
 """ + footer(folder, d)
 
 def check(code, d):
-    need = ['sub2','who_h','who','game_line','c_lead','title','desc','lang_label','h1a','h1b','sub','cta2','notify_subject','hero_aria','g_h2','c_h2','foot','foot_support','foot_privacy']
+    need = ['why_h','short','sub2','who_h','who','game_line','c_lead','title','desc','lang_label','h1a','h1b','sub','cta2','notify_subject','hero_aria','g_h2','c_h2','foot','foot_support','foot_privacy']
     miss = [k for k in need if k not in d]
     assert not miss, (code, miss)
 

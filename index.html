@@ -44,33 +44,49 @@
 <div class="hero">
   <h1><span style="--fit:9.6vw">Snowboarding from scratch</span>Understand the moves before your first day on the slope</h1>
   <div class="pitch">
-    <p>Watching and reading help you understand technique. Here you also control the rider yourself: you try a move, see the result and can change something. Motor-skill training uses this same loop: action, feedback, another try. It helps you take a move apart; doing it with your body is something you learn on the snow.</p>
-    <p>Shift your weight, change edges, bend your knees and see right away how the board reacts: where it turned, how speed and direction changed. You can slow the move down, try it different ways and compare the result. The details get clearer: what to do, why, and how the body moves and the board reacts.</p>
+    <p>Here you control the rider yourself: shift your weight, change edges and see right away how the board reacts.</p>
     <a class="btn" href="mailto:helpyoutofeel@gmail.com?subject=Snowboarding%3A%20tell%20me%20when%20it%20is%20out">Tell me when it’s out</a>
   </div>
   <video data-loop muted loop playsinline preload="metadata" poster="/assets/game.jpg?v=398fdb6f" aria-label="Gameplay: a 3D rider makes linked carved turns down a groomed slope, then rides switch." width="640" height="1312"><source src="/assets/game.mp4?v=afc510f1" type="video/mp4"></video>
 </div>
 <div class="run" id="run">
-  <div class="columns">
-    <div class="copy">
-      <section class="who">
-        <h2>Who it's for</h2>
-        <dl><div><dt>Beginners</dt><dd>Get to the mountain with less fear, already understanding the basics and the mechanics of riding, and knowing what to focus on in your body and movement.</dd></div><div><dt>Improving riders</dt><dd>Put your experience in order and spot your mistakes: wrong moves harden into habits and we stop noticing them. Get to grips with linked turns and the basics of carving, and ride the simulator along the way.</dd></div><div><dt>Short on time</dt><dd>Don't spend expensive hours with an instructor on basic theory.</dd></div></dl>
-      </section>
-      <section class="plan">
-        <h2>23 lessons in 7 levels</h2>
-        <p class="lead">23 lessons in order take you from stance and safety rules to confident turns and a first look at carving. You'll get to the slope knowing how to move and what to pay attention to while you practice.</p>
-        <ol class="levels"><li><b class="pole">1</b><span>Safety first</span></li><li><button type="button" data-at="0"><b class="pole">2</b><span>Basics</span></button></li><li><button type="button" data-at="9.9"><b class="pole">3</b><span>Sliding</span></button></li><li><button type="button" data-at="15.1"><b class="pole">4</b><span>Lifts</span></button></li><li><button type="button" data-at="26.2"><b class="pole">5</b><span>Control</span></button></li><li><button type="button" data-at="37.6"><b class="pole">6</b><span>Turning</span></button></li><li><button type="button" data-at="61.7"><b class="pole">7</b><span>Riding</span></button></li></ol>
-        <p class="game">Then lock it all in with the riding simulator, on different runs in different countries.</p>
-      </section>
+<section class="why">
+  <div class="why-in">
+    <div class="why-text">
+      <h2>How it's different from video lessons</h2>
+      <p>Watching and reading help you understand technique. Here you also control the rider yourself: you try a move, see the result and can change something. Motor learning relies on this loop: action, feedback, another try. It helps you break a move down; you learn to do it with your body on the snow.</p>
+      <p>Shift your weight, change edges, bend your knees and see right away how the board reacts: where it turned, how speed and direction changed. You can slow the move down, try it in different ways and compare the result. The details get clearer: what to do, why, and how the body moves and the board reacts.</p>
     </div>
-    <div class="screen" role="group" aria-label="A look inside">
-      <video data-loop data-film muted loop playsinline preload="metadata" poster="/assets/film.jpg?v=10ff164a" width="640" height="1312"><source src="/assets/film.mp4?v=b559445f" type="video/mp4"></video>
-      <p class="stage">Basics</p>
-      <p class="line">Feel support through the boots</p>
-    </div>
+    <figure class="try">
+      <figcaption>Try it here: drag the ball</figcaption>
+      <div class="deck" id="deck">
+        <span class="dir toes">toes</span><span class="dir heels">heels</span><span class="dir nose">nose</span><span class="dir tail">tail</span>
+        <svg class="board" viewBox="0 0 520 130" aria-hidden="true"><path class="sheet" d="M58 12H462C500 12 512 42 512 65S500 118 462 118H58C20 118 8 88 8 65S20 12 58 12Z"/><path class="edge-toe" d="M58 12H462"/><path class="edge-heel" d="M58 118H462"/><rect class="stripe" x="82" y="30" width="12" height="70" rx="3"/><rect class="stripe" x="426" y="30" width="12" height="70" rx="3"/><rect class="bind" x="148" y="34" width="44" height="62" rx="12"/><rect class="bind" x="328" y="34" width="44" height="62" rx="12"/></svg>
+        <button type="button" class="ball" id="ball" aria-label="Your weight over the board. Drag the ball, or move it with the arrow keys."></button>
+      </div>
+      <p class="say" id="say" aria-live="polite" data-flat="Flat board, weight centered." data-nose="Flat board, weight on the leading foot: the nose heads for the fall line." data-toes="On your toes: the toe edge grips." data-heels="On your heels: the heel edge grips." data-back="Weight back: the tail lets go. Stay over the leading foot as the nose drops.">Flat board, weight centered.</p>
+      <small>A simplified model for this page. In the app, it steers the rider.</small>
+    </figure>
+  </div>
+</section>
+<section class="who">
+  <h2>Who it's for</h2>
+  <dl><div><dt>Beginners</dt><dd>Get to the mountain with less fear, already understanding the basics and the mechanics of riding, and knowing what to focus on in your body and movement.</dd></div><div><dt>Intermediate riders</dt><dd>Make sense of what you already do and spot your mistakes: wrong movements turn into habits, and we stop noticing them. Figure out linked turns and the basics of carving, and take a few runs in the simulator.</dd></div><div><dt>Short on time</dt><dd>Don't spend expensive hours with an instructor on basic theory.</dd></div></dl>
+</section>
+<section class="columns">
+  <div class="plan">
+    <h2>23 lessons in 7 levels</h2>
+    <p class="lead">23 lessons in order take you from stance and safety rules to confident turns and a first look at carving. You'll get to the slope knowing how to move and what to pay attention to while you practice.</p>
+    <ol class="levels"><li><b class="pole">1</b><span>Safety first</span></li><li><button type="button" data-at="0"><b class="pole">2</b><span>Basics</span></button></li><li><button type="button" data-at="9.9"><b class="pole">3</b><span>Sliding</span></button></li><li><button type="button" data-at="15.1"><b class="pole">4</b><span>Lifts</span></button></li><li><button type="button" data-at="26.2"><b class="pole">5</b><span>Control</span></button></li><li><button type="button" data-at="37.6"><b class="pole">6</b><span>Turning</span></button></li><li><button type="button" data-at="61.7"><b class="pole">7</b><span>Riding</span></button></li></ol>
+    <p class="game">Then lock it all in with the riding simulator, on different runs in different countries.</p>
+  </div>
+  <div class="screen" role="group" aria-label="A look inside">
+    <video data-loop data-film muted loop playsinline preload="metadata" poster="/assets/film.jpg?v=10ff164a" width="640" height="1312"><source src="/assets/film.mp4?v=b559445f" type="video/mp4"></video>
+    <p class="stage">Basics</p>
+    <p class="line">Feel support through the boots</p>
   </div>
   <script type="application/json" id="film-lines">[[0, "Feel support through the boots"], [4.2, "Push short, glide on the board"], [9.9, "Finish the glide with an arc"], [15.1, "To the loading line"], [16.6, "Look over your shoulder"], [18.0, "Sit when it arrives"], [19.3, "Back against the backrest, board straight"], [20.5, "Raise the bar at the sign"], [22.3, "Board on the snow, free foot on the pad"], [23.8, "Stand up"], [25.0, "Straight down the ramp"], [26.2, "Let the edge release gradually"], [30.9, "Guide the board with your weight"], [37.6, "Almost a turn, on one edge"], [39.23, "Weight toward the leading foot"], [40.83, "Leading foot flat, nose drops"], [41.93, "Weight to the middle, the board comes back"], [45.1, "From one arc to the next"], [46.73, "Look where you're going next"], [47.93, "Weight toward the leading foot"], [49.53, "Leading foot flat, nose drops"], [51.83, "Flat board, nose in the fall line"], [53.63, "Leading knee and hip steer the arc"], [55.6, "Lighten the board, up or down"], [57.28, "Extend"], [59.1, "Flex into the new arc"], [61.7, "Ride with the other foot forward"], [69.4, "Feel the board through your iPhone"]]</script>
+</section>
 </div>
 </main>
 <footer>

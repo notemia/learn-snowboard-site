@@ -42,6 +42,7 @@
         stage = m;
         stops[m].setAttribute('aria-current', 'true');
         stageEl.textContent = stops[m].querySelector('span').textContent;
+        stageEl.style.background = getComputedStyle(stops[m].querySelector('.pole')).backgroundColor;
       }
       var end = m + 1 < marks.length ? marks[m + 1] : (film.duration || t + 1);
       stops[m].style.setProperty('--done', Math.min(1, (t - marks[m]) / (end - marks[m])).toFixed(3));
@@ -52,6 +53,65 @@
       b.addEventListener('click', function () { film.currentTime = marks[i] + 0.05; sync(); film.play().catch(function () {}); });
     });
     sync();
+  }
+
+  // The yellow ball is your weight over the board. Where it sits decides what the board does.
+  var deck = document.getElementById('deck'), ball = document.getElementById('ball'), say = document.getElementById('say');
+  if (deck) {
+    var pos = { x: 0, y: 0 }, tour = true, state = '';
+    var clamp = function (v) { return Math.max(-1, Math.min(1, v)); };
+    var read = function (p) {
+      if (p.x < -0.35) return 'back';
+      if (p.y > 0.35) return 'toes';
+      if (p.y < -0.35) return 'heels';
+      if (p.x > 0.35) return 'nose';
+      return 'flat';
+    };
+    var place = function (x, y) {
+      pos.x = clamp(x); pos.y = clamp(y);
+      ball.style.left = (50 + pos.x * 37) + '%';
+      ball.style.top = (50 - pos.y * 33) + '%';
+      deck.style.setProperty('--edge', pos.y.toFixed(3));
+      deck.style.setProperty('--nose', (pos.x * (1 - Math.abs(pos.y))).toFixed(3));
+      deck.style.setProperty('--toe-on', Math.max(0, pos.y).toFixed(3));
+      deck.style.setProperty('--heel-on', Math.max(0, -pos.y).toFixed(3));
+      var now = read(pos);
+      if (now !== state) { state = now; say.textContent = say.dataset[now]; }
+    };
+    var fromEvent = function (e) {
+      var r = deck.getBoundingClientRect();
+      place(((e.clientX - r.left) / r.width * 100 - 50) / 37, -((e.clientY - r.top) / r.height * 100 - 50) / 33);
+    };
+    var dragging = false;
+    ball.addEventListener('pointerdown', function (e) { tour = false; dragging = true; ball.setPointerCapture(e.pointerId); e.preventDefault(); });
+    ball.addEventListener('pointermove', function (e) { if (dragging) fromEvent(e); });
+    ball.addEventListener('pointerup', function () { dragging = false; });
+    ball.addEventListener('pointercancel', function () { dragging = false; });
+    deck.addEventListener('click', function (e) { if (e.target !== ball) { tour = false; fromEvent(e); } });
+    ball.addEventListener('keydown', function (e) {
+      var d = { ArrowLeft: [-0.1, 0], ArrowRight: [0.1, 0], ArrowUp: [0, 0.1], ArrowDown: [0, -0.1] }[e.key];
+      if (!d) return;
+      e.preventDefault(); tour = false; place(pos.x + d[0], pos.y + d[1]);
+    });
+    place(0, 0);
+    // Once, when it comes into view, the ball shows what it can do. Any touch ends this.
+    if (!reduce) {
+      var route = [[0, 0], [0.75, 0], [0, 0], [0, 0.8], [0, 0], [0, -0.8], [0, 0]];
+      var shown = new IntersectionObserver(function (entries) {
+        if (!entries[0].isIntersecting) return;
+        shown.disconnect();
+        var started = performance.now() + 500, leg = 1100;
+        requestAnimationFrame(function step(now) {
+          if (!tour) return;
+          var t = Math.max(0, now - started) / leg, i = Math.floor(t);
+          if (i >= route.length - 1) { place(0, 0); return; }
+          var u = t - i, s = u * u * (3 - 2 * u);
+          place(route[i][0] + (route[i + 1][0] - route[i][0]) * s, route[i][1] + (route[i + 1][1] - route[i][1]) * s);
+          requestAnimationFrame(step);
+        });
+      }, { threshold: 0.6 });
+      shown.observe(deck);
+    }
   }
 
   // The track: one S-line down the run, carved as you scroll.
@@ -75,7 +135,7 @@
   el('rect', { x: 18, y: -7, width: 4, height: 14, fill: '#f4661b' }, board);
   el('rect', { x: -15, y: -6, width: 9, height: 12, rx: 3, fill: '#15174f' }, board);
   el('rect', { x: 6, y: -6, width: 9, height: 12, rx: 3, fill: '#15174f' }, board);
-  run.prepend(track);
+  run.appendChild(track);
   run.appendChild(rider);
 
   var apex = [];
@@ -92,8 +152,8 @@
 
   // The track swings in the free strip on the right, one turn every few hundred pixels.
   function apexes(W, H) {
-    var phone = W <= 760;
-    var near = phone ? W - 44 : W * 0.915, far = phone ? W - 12 : W * 0.975;
+    var phone = W <= 760, room = parseFloat(getComputedStyle(document.querySelector('.who')).paddingRight);
+    var near = W - room + (phone ? 10 : 22), far = W - (phone ? 10 : 20);
     var step = phone ? 300 : 230, pts = [], right = false;
     for (var y = 24; y < H - step / 2; y += step, right = !right) pts.push({ x: right ? far : near, y: y, toe: right });
     pts.push({ x: right ? far : near, y: H, toe: right });
@@ -150,7 +210,7 @@
     board.style.display = reduce ? 'none' : '';
     if (reduce) return;
     var p = at(head);
-    board.setAttribute('transform', 'translate(' + p.x.toFixed(1) + ' ' + head.toFixed(1) + ') rotate(' + p.angle.toFixed(1) + ') scale(' + (W <= 760 ? 0.68 : 1) + ')');
+    board.setAttribute('transform', 'translate(' + p.x.toFixed(1) + ' ' + head.toFixed(1) + ') rotate(' + p.angle.toFixed(1) + ') scale(' + (W <= 760 ? 0.5 : 0.72) + ')');
   }
 
   window.addEventListener('scroll', function () {

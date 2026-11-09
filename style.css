@@ -8,8 +8,9 @@
 :root {
   --snow: #eef2f8; --shadow: #cdd7e6; --ink: #142238; --ink-2: #44546a;
   --toe: #f4661b; --heel: #12a5a2; --night: #16263d;
-  --gutter: max(clamp(16px, 4vw, 64px), calc((100vw - 1320px) / 2));
-  --track: max(var(--gutter), 11vw);
+  --gutter: max(clamp(16px, 4vw, 64px), calc((100vw - 1280px) / 2));
+  --dusk: #1c3f73; --weight: #f7c531;
+  --right: max(var(--gutter), 7.5vw);
   --display: "Sofia Display", "Hiragino Sans", "PingFang SC", "Apple SD Gothic Neo", sans-serif;
   color-scheme: light;
 }
@@ -42,39 +43,67 @@ a { color: inherit; }
 .langs a { padding: .35rem .6rem; border-radius: 8px; text-decoration: none; }
 .langs a:hover, .langs a[aria-current] { background: var(--snow); }
 
-/* First screen: the mountain, the words, the run */
-.hero { display: grid; grid-template-columns: minmax(0, 1fr) auto; grid-template-areas: "name video" "pitch video"; grid-template-rows: auto 1fr;
-  column-gap: clamp(2rem, 6vw, 6rem); min-height: min(100svh, 860px); padding: 76px var(--gutter) 3rem;
-  background: linear-gradient(transparent 72%, var(--snow) 100%), linear-gradient(100deg, #eef2f88c 0%, #eef2f866 42%, transparent 66%), url(/assets/hero.jpg) 60% bottom / cover no-repeat #7fa3cc; }
-h1 { grid-area: name; align-self: end; font: 600 clamp(1.375rem, 2.2vw, 2rem)/1.15 "Sofia Text", -apple-system, sans-serif; }
-h1 span { display: block; font: 800 min(calc(var(--fit) * .58), 9.5rem)/.92 var(--display); letter-spacing: -.012em; margin-bottom: .08em; }
-.pitch { grid-area: pitch; max-width: 42rem; margin-top: 1.1rem; }
-.pitch p + p { margin-top: .7em; }
-.pitch p { text-shadow: 0 0 10px #eef2f8b3, 0 0 2px #eef2f866; }
-.pitch .btn { margin-top: 1.25rem; }
-.hero video { grid-area: video; align-self: center; height: min(76svh, 680px); width: auto; aspect-ratio: 640 / 1312; border-radius: 26px; background: var(--shadow); box-shadow: 0 18px 48px #14223840; }
+/* First screen: words in the sky, peaks below, and the run coming down into the page */
+.hero { position: relative; z-index: 2; display: grid; grid-template-columns: minmax(0, 1fr) auto; grid-template-areas: "name video" "pitch video"; grid-template-rows: auto 1fr;
+  column-gap: clamp(2rem, 6vw, 6rem); min-height: min(100svh, 880px); padding: 84px var(--right) 0 var(--gutter);
+  --img-w: max(100vw, 1500px); --img-h: calc(var(--img-w) * .5155);
+  background: linear-gradient(transparent 80%, var(--snow) 100%), linear-gradient(to top, transparent calc(var(--img-h) - 260px), #5e8dc5 var(--img-h)), url(/assets/hero.jpg) 55% bottom / var(--img-w) auto no-repeat #5e8dc5; }
+h1 { grid-area: name; align-self: end; font: 600 clamp(1.25rem, 2.1vw, 1.875rem)/1.15 "Sofia Text", -apple-system, sans-serif; text-wrap: balance; }
+h1 span { display: block; font: 800 min(calc(var(--fit) * .62), 10rem)/.9 var(--display); letter-spacing: -.012em; margin-bottom: .1em; }
+.pitch { grid-area: pitch; max-width: 34rem; margin-top: 1rem; font-size: clamp(1.125rem, 1.5vw, 1.3125rem); line-height: 1.35; }
+.pitch .btn { margin-top: 1.1rem; font-size: 1.125rem; }
+.hero video { grid-area: video; align-self: end; margin-bottom: -56px; height: min(82svh, 720px); width: auto; aspect-ratio: 640 / 1312; border-radius: 26px; background: var(--shadow); box-shadow: 0 24px 60px #14223859; }
 
-/* The run: the track and the board are added by app.js */
+/* What makes the app different: the words, and the idea working under your finger */
+/* Everything below the hero is the run. The board and its track live in the free strip on the right. */
 .run { position: relative; }
-.track, .rider { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; }
-.track { z-index: 0; } .rider { z-index: 3; }
-.groove { fill: none; stroke: var(--shadow); stroke-width: 24; stroke-linecap: round; opacity: .7; }
-.edge { fill: none; stroke-width: 4.5; stroke-linecap: butt; }
+.track, .rider { position: absolute; inset: 0; z-index: 2; width: 100%; height: 100%; pointer-events: none; }
+.rider { z-index: 3; }
+.groove { fill: none; stroke: var(--shadow); stroke-width: 16; stroke-linecap: round; opacity: .6; }
+.edge { fill: none; stroke-width: 3.5; stroke-linecap: butt; }
 .edge.toe { stroke: var(--toe); } .edge.heel { stroke: var(--heel); }
-/* Words on the left, the film beside them for as long as they last */
-.columns { position: relative; z-index: 1; display: grid; grid-template-columns: minmax(0, 1fr) auto; column-gap: clamp(2rem, 6vw, 6rem); align-items: start;
-  padding: 1.5rem var(--track) 3rem var(--gutter); }
-.who dl { display: grid; grid-template-columns: minmax(9rem, 13rem) minmax(0, 1fr); gap: .85rem 1.5rem; margin: .75rem 0 0; }
-.who dl > div { display: contents; }
-.who dt { font-weight: 700; line-height: 1.35; }
-.who dd { margin: 0; color: var(--ink-2); line-height: 1.4; max-width: 38rem; }
-.plan { margin-top: 2.5rem; }
-.lead { margin-top: .4rem; max-width: 40rem; }
-.game { margin-top: 1.1rem; font-weight: 600; max-width: 40rem; }
-h2 { font: 800 clamp(2.25rem, 3.6vw, 3.25rem)/1 var(--display); text-wrap: balance; margin-bottom: .2em; }
-:is(:lang(ja), :lang(ko), :lang(zh-Hans)) h2 { font-size: clamp(1.75rem, 3.4vw, 2.75rem); font-weight: 700; line-height: 1.2; }
-.levels { list-style: none; padding: 0; margin-top: 1rem; display: grid; grid-template-rows: repeat(4, auto); grid-auto-flow: column; gap: .5rem 1.5rem; max-width: 34rem; font-weight: 600; line-height: 1.2; }
-.levels li, .levels button { display: flex; align-items: center; gap: .65rem; }
+.why { position: relative; background: var(--dusk); color: #fff; padding: 112px var(--right) 72px var(--gutter); }
+.why::before { content: ""; position: absolute; inset: -1px 0 auto; height: 56px; background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 56' preserveAspectRatio='none'%3E%3Cpath fill='%23eef2f8' d='M0 0H1440V22C1320 50 1210 12 1080 30S860 54 720 34 470 8 330 30 110 52 0 26Z'/%3E%3C/svg%3E") center top / 100% 100% no-repeat; }
+.why-in { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.05fr); gap: clamp(2.5rem, 6vw, 6rem); align-items: center; }
+.why-text p { max-width: 36rem; color: #dbe5f3; }
+.why-text p + p { margin-top: .85em; }
+.why h2 { margin-bottom: .4em; }
+.try { display: grid; gap: .7rem; }
+.try figcaption { font: 700 1.5rem/1.1 var(--display); color: var(--weight); }
+:is(:lang(ja), :lang(ko), :lang(zh-Hans)) .try figcaption { font-size: 1.25rem; }
+.deck { position: relative; aspect-ratio: 5 / 2.7; border-radius: 18px; background: var(--snow); color: var(--ink); touch-action: pan-y; user-select: none; overflow: hidden; cursor: pointer;
+  --edge: 0; --nose: 0; --toe-on: 0; --heel-on: 0; }
+.board { position: absolute; left: 11%; right: 11%; top: 50%; width: 78%; translate: 0 -50%; overflow: visible; transform: perspective(900px) rotateX(calc(var(--edge) * 26deg)) rotate(calc(var(--nose) * 13deg)); }
+.sheet { fill: var(--ink); }
+.stripe { fill: var(--toe); }
+.bind { fill: #3a4d6b; }
+.edge-toe, .edge-heel { fill: none; stroke-width: 7; stroke-linecap: round; }
+.edge-toe { stroke: var(--toe); opacity: var(--toe-on); }
+.edge-heel { stroke: var(--heel); opacity: var(--heel-on); }
+.dir { position: absolute; font-size: 1rem; font-weight: 600; color: var(--ink-2); pointer-events: none; }
+.dir.toes { top: 10px; left: 50%; translate: -50% 0; } .dir.heels { bottom: 10px; left: 50%; translate: -50% 0; }
+.dir.nose { right: 12px; top: 50%; translate: 0 -50%; } .dir.tail { left: 12px; top: 50%; translate: 0 -50%; }
+.ball { position: absolute; left: 50%; top: 50%; width: 52px; height: 52px; margin: -26px 0 0 -26px; padding: 0; border: 3px solid var(--ink); border-radius: 50%; background: var(--weight); box-shadow: 0 6px 14px #14223866; cursor: grab; touch-action: none; }
+.ball:active { cursor: grabbing; }
+.say { min-height: 2.9em; font-size: 1.1875rem; font-weight: 600; line-height: 1.3; }
+.try small { color: #b5c6de; font-size: .9375rem; }
+
+/* Who it helps */
+.who { padding: 3.5rem var(--right) 1rem var(--gutter); }
+.who dl { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1.5rem clamp(1.5rem, 4vw, 4rem); margin: 1rem 0 0; }
+.who dt { font: 700 1.625rem/1.1 var(--display); }
+:is(:lang(ja), :lang(ko), :lang(zh-Hans)) .who dt { font-size: 1.25rem; line-height: 1.3; }
+.who dd { margin: .4rem 0 0; color: var(--ink-2); line-height: 1.4; }
+
+/* The path: the levels as one run down the page, the film beside it */
+.columns { display: grid; grid-template-columns: minmax(0, 1fr) auto; column-gap: clamp(2rem, 7vw, 7rem); align-items: start; padding: 3rem var(--right) 4rem var(--gutter); }
+.lead { margin-top: .4rem; max-width: 38rem; }
+.game { margin-top: 1.25rem; font-weight: 600; max-width: 38rem; }
+h2 { font: 800 clamp(2.5rem, 4.2vw, 3.75rem)/1 var(--display); text-wrap: balance; margin-bottom: .2em; }
+:is(:lang(ja), :lang(ko), :lang(zh-Hans)) h2 { font-size: clamp(1.75rem, 3.2vw, 2.75rem); font-weight: 700; line-height: 1.2; }
+.levels { position: relative; list-style: none; padding: 0; margin-top: 1.25rem; display: grid; gap: .7rem; font-size: 1.1875rem; font-weight: 600; line-height: 1.2; }
+.levels::before { content: ""; position: absolute; left: 16px; top: 18px; bottom: 18px; width: 4px; border-radius: 2px; background: linear-gradient(#218f54 0 22%, #2668d8 34% 52%, #d13333 64% 80%, var(--ink) 92%); }
+.levels li, .levels button { position: relative; display: flex; align-items: center; gap: .75rem; }
 .levels button { width: 100%; padding: 0; border: 0; background: none; color: inherit; font: inherit; text-align: left; cursor: pointer; border-radius: 10px; }
 .levels button span { flex: 1; background: linear-gradient(var(--toe), var(--toe)) left bottom / calc(var(--done, 0) * 100%) 3px no-repeat; padding-block: .2em; }
 .levels button:hover span, .levels button[aria-current] span { font-weight: 800; }
@@ -87,7 +116,7 @@ h2 { font: 800 clamp(2.25rem, 3.6vw, 3.25rem)/1 var(--display); text-wrap: balan
 .screen { position: sticky; top: 20px; height: min(calc(100svh - 40px), 720px); aspect-ratio: 640 / 1312; }
 .screen video { width: 100%; height: 100%; border-radius: 26px; background: var(--shadow); box-shadow: 0 18px 48px #14223840; }
 .stage, .line { position: absolute; left: 18px; right: 18px; font-family: var(--display); }
-.stage { top: 16px; display: inline-block; right: auto; padding: .15em .6em; border-radius: 8px; background: var(--ink); color: #fff; font-weight: 700; font-size: 1.125rem; }
+.stage { top: 16px; display: inline-block; right: auto; padding: .15em .6em; border-radius: 8px; background: #218f54; color: #fff; font-weight: 700; font-size: 1.125rem; }
 .line { bottom: 20px; font-weight: 800; font-size: 1.75rem; line-height: 1.05; text-wrap: balance; }
 :is(:lang(ja), :lang(ko), :lang(zh-Hans)) .line { font-weight: 700; font-size: 1.5rem; line-height: 1.25; }
 
@@ -113,23 +142,26 @@ footer nav { display: flex; gap: 1.5rem; font-size: .9375rem; }
 .rows details p { padding-bottom: 1rem; color: var(--ink-2); font-size: 1.0625rem; }
 
 @media (max-width: 1023px) {
-  .who dl { grid-template-columns: 1fr; gap: .15rem; }
-  .who dd { margin-bottom: .7rem; }
+  .why-in { grid-template-columns: 1fr; }
+  .who dl { grid-template-columns: 1fr; gap: 1rem; }
 }
 @media (max-width: 760px) {
+  :root { --right: 46px; }
+  .groove { stroke-width: 11; }
+  .edge { stroke-width: 2.5; }
   .brand span { display: none; }
-  .hero { grid-template-columns: 1fr; grid-template-areas: "name" "pitch" "video"; grid-template-rows: auto; min-height: 0; padding: 62px var(--gutter) 2.25rem; background-position: 62% bottom, 0 0, 62% bottom; }
+  .hero { grid-template-columns: 1fr; grid-template-areas: "name" "pitch" "video"; grid-template-rows: auto; min-height: 0; padding: 62px var(--gutter) 0; --img-w: 900px; }
   h1 { font-size: 1.25rem; }
   h1 span { font-size: min(var(--fit), 8.5rem); }
-  .pitch { margin-top: .8rem; font-size: 1.0625rem; max-width: none; }
-  .pitch .btn { padding: .65em 1.05em; font-size: 1rem; }
-  .hero video { justify-self: center; margin-top: 1.25rem; height: auto; width: min(64vw, 280px); border-radius: 20px; }
-  .groove { stroke-width: 14; }
-  .edge { stroke-width: 3; }
-  .columns { grid-template-columns: 1fr; row-gap: 1.5rem; padding: 1rem 58px 2rem var(--gutter); }
-  h2 { font-size: 2rem; }
-  .levels { gap: .45rem .6rem; font-size: 1rem; }
-  .pole { width: 2rem; height: 2rem; font-size: 1.25rem; }
+  .pitch { font-size: 1.125rem; max-width: none; }
+  .hero video { justify-self: center; margin-top: 1.5rem; margin-bottom: -40px; height: auto; width: min(66vw, 290px); border-radius: 20px; }
+  .why { padding: 88px var(--right) 3rem var(--gutter); }
+  .why::before { height: 36px; }
+  .deck { aspect-ratio: 4 / 3; }
+  .ball { width: 56px; height: 56px; margin: -28px 0 0 -28px; }
+  .who { padding-top: 2.5rem; }
+  h2 { font-size: 2.25rem; }
+  .columns { grid-template-columns: 1fr; row-gap: 2rem; padding: 2.25rem var(--right) 3rem var(--gutter); }
   .screen { position: relative; top: 0; height: auto; width: min(100%, 300px); justify-self: center; }
   .screen video { height: auto; border-radius: 18px; }
   .stage { top: 10px; left: 12px; font-size: 1rem; }
