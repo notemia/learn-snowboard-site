@@ -70,10 +70,17 @@ h2 { font: 800 clamp(2.25rem, 3.6vw, 3.25rem)/1 var(--display); text-wrap: balan
 .levels li:nth-child(n+5) .pole { background: #d13333; }
 .levels li:nth-child(7) .pole { background: var(--ink); }
 
-.scenes { display: grid; grid-auto-flow: column; grid-auto-columns: minmax(10.5rem, 1fr); gap: 10px; overflow-x: auto; scroll-snap-type: x proximity; padding: 0 0 1.1rem var(--gutter); margin-right: 11vw; }
-.scenes figure { scroll-snap-align: center; }
-.scenes img { width: 100%; aspect-ratio: 4 / 3; object-fit: cover; border-radius: 12px; }
-.scenes figcaption { padding-top: .3rem; font-size: .9375rem; font-weight: 600; line-height: 1.2; }
+/* One day on the mountain: the film, its line on the snow, and a rail that gets harder as it goes */
+.film { position: relative; z-index: 1; width: min(calc(100% - var(--gutter) - 11vw), calc(64svh * 16 / 9)); margin-left: var(--gutter); padding-bottom: 1.25rem; }
+.screen { position: relative; }
+.film video { width: 100%; aspect-ratio: 16 / 9; border-radius: 14px; background: var(--shadow); }
+.line { position: absolute; left: clamp(14px, 2.2vw, 32px); right: 30%; bottom: clamp(12px, 2vw, 28px); font: 800 clamp(1.5rem, 3vw, 2.75rem)/1.02 var(--display); text-wrap: balance; }
+:is(:lang(ja), :lang(ko), :lang(zh-Hans)) .line { font-weight: 700; line-height: 1.2; }
+.rail { list-style: none; display: flex; gap: 4px; padding: 0; margin: 10px 0 0; }
+.rail li { min-width: 0; }
+.rail button { display: block; width: 100%; padding: 10px 0; border: 0; background: none; cursor: pointer; }
+.rail i { display: block; height: 7px; border-radius: 4px; background: linear-gradient(90deg, var(--pole) calc(var(--done, 0) * 100%), color-mix(in srgb, var(--pole) 24%, var(--snow)) 0); transition: height .12s; }
+.rail button:hover i, .rail button[aria-current] i { height: 11px; margin-block: -2px; }
 
 footer { position: relative; z-index: 2; display: flex; justify-content: space-between; gap: 1rem 1.5rem; flex-wrap: wrap; padding: 1.1rem var(--gutter) 1.4rem; background: var(--night); color: var(--shadow); }
 footer small { font-size: .9375rem; max-width: 40rem; }
@@ -110,9 +117,14 @@ footer nav { display: flex; gap: 1.5rem; font-size: .9375rem; }
   .in { width: 100%; }
   .levels { grid-template-columns: 1fr 1fr; gap: .45rem .6rem; font-size: 1rem; }
   .pole { width: 2rem; height: 2rem; font-size: 1.25rem; }
-  .scenes { grid-auto-columns: 40vw; gap: 8px; margin-right: 54px; }
+  .film { width: calc(100% - var(--gutter) - 54px); }
+  .film video { border-radius: 10px; }
+  .line { position: static; margin-top: .55rem; font-size: 1.375rem; }
+  .rail { margin-top: 2px; }
 }
 @media (prefers-reduced-motion: reduce) {
   .btn, .rows summary::after { transition: none; }
   .btn:hover { transform: none; }
+  .rail i { transition: none; }
+  .line { position: static; margin-top: .55rem; }
 }

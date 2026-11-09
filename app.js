@@ -18,6 +18,41 @@
     }, { threshold: 0.25 }).observe(v);
   });
 
+  // The film: the line over it and the rail follow the picture; the rail also jumps to a chapter.
+  var film = document.querySelector('video[data-film]');
+  if (film) {
+    var line = document.querySelector('.line');
+    var stops = [].slice.call(document.querySelectorAll('.rail button'));
+    var marks = stops.map(function (b) { return parseFloat(b.dataset.at); });
+    var shown = -1;
+    var sync = function () {
+      var t = film.currentTime, n = marks.length - 1;
+      while (n > 0 && marks[n] > t) n--;
+      if (n !== shown) {
+        shown = n;
+        line.textContent = stops[n].dataset.line;
+        stops.forEach(function (b, i) { if (i === n) b.setAttribute('aria-current', 'true'); else b.removeAttribute('aria-current'); });
+      }
+      var total = film.duration || marks[marks.length - 1] + 1;
+      stops.forEach(function (b, i) {
+        var end = i + 1 < marks.length ? marks[i + 1] : total;
+        b.style.setProperty('--done', Math.max(0, Math.min(1, (t - marks[i]) / (end - marks[i]))).toFixed(3));
+      });
+    };
+    var running = false;
+    var frame = function () {
+      sync();
+      if (film.paused) { running = false; return; }
+      requestAnimationFrame(frame);
+    };
+    film.addEventListener('play', function () { if (!running) { running = true; requestAnimationFrame(frame); } });
+    film.addEventListener('seeked', sync);
+    stops.forEach(function (b, i) {
+      b.addEventListener('click', function () { film.currentTime = marks[i] + 0.05; sync(); film.play().catch(function () {}); });
+    });
+    sync();
+  }
+
   // The track: one S-line down the run, carved as you scroll.
   // Orange on toe-side arcs and teal on heel-side arcs, like the app's edges.
   var run = document.getElementById('run');

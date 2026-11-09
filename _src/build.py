@@ -46,6 +46,13 @@ def fit(word, code):
 
 MAIL = 'mailto:helpyoutofeel@gmail.com'
 
+GREEN, BLUE, RED, BLACK = '#218f54', '#2668d8', '#d13333', '#142238'
+lesson_line = lambda n: (lambda ck, d: app(f'lesson{n}.title', ck))
+# Film chapters: start in seconds, piste color, the line shown.
+FILM = [(0, GREEN, lesson_line(2)), (3.65, GREEN, lesson_line(21)), (11.3, BLUE, lesson_line(1)), (15.95, BLUE, lesson_line(4)),
+        (22.6, BLUE, lesson_line(18)), (28.9, RED, lesson_line(14)), (34.55, RED, lesson_line(15)), (46.2, BLACK, lambda ck, d: d['m_h2'])]
+FILM_END = 70.27
+
 def icon(name):
     """Icon address tied to the file's content: Cloudflare lets browsers keep images for hours."""
     with open(os.path.join(SITE, 'assets', name), 'rb') as f:
@@ -110,10 +117,12 @@ def build(code, folder, hl, ogl, ck, native, d):
               "screenshot": [BASE + "assets/game.jpg"],
               "author": {"@type": "Person", "name": "Vladimir Dyagay"}}
     ld = json.dumps(app_ld, ensure_ascii=False).replace('</', '<\\/')
-    # Lessons, from the simplest to the hardest: the 3D scene and the lesson's own name.
-    scenes = ''.join(
-        f'<figure><img src="/assets/lessons/{code}/{img}.webp" alt="" width="560" height="420" loading="lazy"><figcaption>{e(app(f"lesson{n}.skill", ck))}</figcaption></figure>'
-        for img, n in (('falling', 18), ('surfaceLift', 20), ('edgeRelease', 1), ('linkedTurns', 15), ('absorb', 9)))
+    # One day on the mountain, one film for every language: the line over it is the lesson's own name.
+    # The rail's colors climb like piste colors, as the lessons get harder.
+    rail = ''.join(
+        f'<li style="flex:{end - at:.2f}"><button type="button" data-at="{at}" data-line="{a(title(ck, d))}" aria-label="{a(title(ck, d))}" style="--pole:{pole}"><i></i></button></li>'
+        for (at, end), pole, title in zip(zip([c[0] for c in FILM], [c[0] for c in FILM[1:]] + [FILM_END]), [c[1] for c in FILM], [c[2] for c in FILM]))
+    first = FILM[0][2](ck, d)
     levels = ''.join(f'<li><b class="pole">{i}</b>{e(app(stem + ".title", ck))}</li>' for i, (stem, _) in enumerate(LEVELS, 1))
     return head_tags(url, hl, ogl, code, d['title'], d['desc'], alternates()) + f"""<script type="application/ld+json">{ld}</script>
 </head>
@@ -126,14 +135,20 @@ def build(code, folder, hl, ogl, ck, native, d):
     <p>{e(d['sub'])}</p>
     <a class="btn" href="{a(mail)}">{e(d['cta2'])}</a>
   </div>
-  <video data-loop muted loop playsinline preload="auto" poster="/assets/game.jpg" aria-label="{a(d['hero_aria'])}" width="640" height="1312"><source src="/assets/game.mp4" type="video/mp4"></video>
+  <video data-loop muted loop playsinline preload="metadata" poster="{icon('game.jpg')}" aria-label="{a(d['hero_aria'])}" width="640" height="1312"><source src="{icon('game.mp4')}" type="video/mp4"></video>
 </div>
 <div class="run" id="run">
   <section class="gate"><div class="in">
     <h2>{e(d['c_h2'])}</h2>
     <ol class="levels">{levels}</ol>
   </div></section>
-  <div class="scenes" tabindex="0" aria-label="{a(d['g_h2'])}">{scenes}</div>
+  <section class="film" aria-label="{a(d['g_h2'])}">
+    <div class="screen">
+      <video data-loop data-film muted loop playsinline preload="metadata" poster="{icon('film.jpg')}" width="1280" height="720"><source src="{icon('film.mp4')}" type="video/mp4"></video>
+      <p class="line">{e(first)}</p>
+    </div>
+    <ol class="rail">{rail}</ol>
+  </section>
 </div>
 </main>
 """ + footer(folder, d)
