@@ -8,44 +8,45 @@
     document.addEventListener('keydown', function (e) { if (e.key === 'Escape') langs.open = false; });
   }
 
-  // The video plays only while on screen, and never under reduced motion.
-  document.querySelectorAll('video[data-loop]').forEach(function (v) {
-    if (reduce) { v.controls = true; return; }
-    new IntersectionObserver(function (entries) {
-      entries.forEach(function (e) {
-        if (e.isIntersecting) { v.play().catch(function () {}); } else { v.pause(); }
+  // Only the video most on screen plays, so a phone never decodes two at once.
+  var videos = [].slice.call(document.querySelectorAll('video[data-loop]'));
+  var share = videos.map(function () { return 0; });
+  if (reduce) {
+    videos.forEach(function (v) { v.controls = true; });
+  } else {
+    var seen = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) { share[videos.indexOf(e.target)] = e.isIntersecting ? e.intersectionRatio : 0; });
+      var best = share.indexOf(Math.max.apply(null, share));
+      videos.forEach(function (v, i) {
+        if (i === best && share[i] >= 0.25) { v.play().catch(function () {}); } else { v.pause(); }
       });
-    }, { threshold: 0.25 }).observe(v);
-  });
+    }, { threshold: [0, 0.25, 0.5, 0.75, 1] });
+    videos.forEach(function (v) { seen.observe(v); });
+  }
 
-  // The film: the line over it and the rail follow the picture; the rail also jumps to a chapter.
+  // The film: its captions follow the picture, and the levels jump to their part.
   var film = document.querySelector('video[data-film]');
   if (film) {
-    var line = document.querySelector('.line');
-    var stops = [].slice.call(document.querySelectorAll('.rail button'));
+    var lineEl = document.querySelector('.line'), stageEl = document.querySelector('.stage');
+    var lines = JSON.parse(document.getElementById('film-lines').textContent);
+    var stops = [].slice.call(document.querySelectorAll('.levels button'));
     var marks = stops.map(function (b) { return parseFloat(b.dataset.at); });
-    var shown = -1;
+    var line = -1, stage = -1;
     var sync = function () {
-      var t = film.currentTime, n = marks.length - 1;
-      while (n > 0 && marks[n] > t) n--;
-      if (n !== shown) {
-        shown = n;
-        line.textContent = stops[n].dataset.line;
-        stops.forEach(function (b, i) { if (i === n) b.setAttribute('aria-current', 'true'); else b.removeAttribute('aria-current'); });
+      var t = film.currentTime, n = lines.length - 1, m = marks.length - 1;
+      while (n > 0 && lines[n][0] > t) n--;
+      while (m > 0 && marks[m] > t) m--;
+      if (n !== line) { line = n; lineEl.textContent = lines[n][1]; }
+      if (m !== stage) {
+        if (stage >= 0) { stops[stage].removeAttribute('aria-current'); stops[stage].style.removeProperty('--done'); }
+        stage = m;
+        stops[m].setAttribute('aria-current', 'true');
+        stageEl.textContent = stops[m].querySelector('span').textContent;
       }
-      var total = film.duration || marks[marks.length - 1] + 1;
-      stops.forEach(function (b, i) {
-        var end = i + 1 < marks.length ? marks[i + 1] : total;
-        b.style.setProperty('--done', Math.max(0, Math.min(1, (t - marks[i]) / (end - marks[i]))).toFixed(3));
-      });
+      var end = m + 1 < marks.length ? marks[m + 1] : (film.duration || t + 1);
+      stops[m].style.setProperty('--done', Math.min(1, (t - marks[m]) / (end - marks[m])).toFixed(3));
     };
-    var running = false;
-    var frame = function () {
-      sync();
-      if (film.paused) { running = false; return; }
-      requestAnimationFrame(frame);
-    };
-    film.addEventListener('play', function () { if (!running) { running = true; requestAnimationFrame(frame); } });
+    film.addEventListener('timeupdate', sync);
     film.addEventListener('seeked', sync);
     stops.forEach(function (b, i) {
       b.addEventListener('click', function () { film.currentTime = marks[i] + 0.05; sync(); film.play().catch(function () {}); });

@@ -27,6 +27,12 @@ LANGS = [
     ('zh', 'zh/',  'zh-Hans', 'zh_CN', 'zh-Hans', '简体中文'),
 ]
 BASE = 'https://learn-snowboard.fun/'
+# The app's App Store name in each language, shown beside the logo.
+METADATA = os.environ.get('SNOWBOARD_METADATA', '/Users/vladimir/claude/SnowboardFeelTheTurn/fastlane/metadata')
+STORE_LOCALE = {'en': 'en-US', 'ru': 'ru', 'de': 'de-DE', 'es': 'es-ES', 'fr': 'fr-FR', 'it': 'it', 'ja': 'ja', 'ko': 'ko', 'zh': 'zh-Hans'}
+def store_name(code):
+    with open(os.path.join(METADATA, STORE_LOCALE[code], 'name.txt'), encoding='utf-8') as f:
+        return f.read().strip()
 STR = json.load(open(CATALOG, encoding='utf-8'))['strings']
 
 def app(key, ck):
@@ -46,17 +52,20 @@ def fit(word, code):
 
 MAIL = 'mailto:helpyoutofeel@gmail.com'
 
-GREEN, BLUE, RED, BLACK = '#218f54', '#2668d8', '#d13333', '#142238'
-lesson_line = lambda n: (lambda ck, d: app(f'lesson{n}.title', ck))
-# Film chapters: start in seconds, piste color, the line shown.
-FILM = [(0, GREEN, lesson_line(2)), (3.65, GREEN, lesson_line(21)), (11.3, BLUE, lesson_line(1)), (15.95, BLUE, lesson_line(4)),
-        (22.6, BLUE, lesson_line(18)), (28.9, RED, lesson_line(14)), (34.55, RED, lesson_line(15)), (46.2, BLACK, lambda ck, d: d['m_h2'])]
-FILM_END = 70.27
+# The film: every caption is the app's own text, so one video serves all languages.
+FILM = json.load(open(os.path.join(HERE, 'film.json'), encoding='utf-8'))
+
+def film_line(key, ck, d):
+    return d[key[5:]] if key.startswith('site:') else app(key, ck)
 
 def icon(name):
     """Icon address tied to the file's content: Cloudflare lets browsers keep images for hours."""
     with open(os.path.join(SITE, 'assets', name), 'rb') as f:
         return f'/assets/{name}?v={hashlib.md5(f.read()).hexdigest()[:8]}'
+
+def favicon_ico():
+    with open(os.path.join(SITE, 'favicon.ico'), 'rb') as f:
+        return f'/favicon.ico?v={hashlib.md5(f.read()).hexdigest()[:8]}'
 
 def head_tags(url, hl, ogl, code, title, desc, alt, image=True):
     og = f"""<meta property="og:image" content="{BASE}assets/og-{code}.jpg">
@@ -74,19 +83,20 @@ def head_tags(url, hl, ogl, code, title, desc, alt, image=True):
 <link rel="canonical" href="{url}">
 {alt}<meta name="theme-color" content="#7fa3cc">
 <meta property="og:type" content="website">
-<meta property="og:site_name" content="Snowboarding">
+<meta property="og:site_name" content="{a(store_name(code))}">
 <meta property="og:title" content="{a(title)}">
 <meta property="og:description" content="{a(desc)}">
 <meta property="og:url" content="{url}">
 {og}<meta property="og:locale" content="{ogl}">
-<link rel="icon" href="{icon('icon-64.png')}" type="image/png">
+<link rel="icon" href="{favicon_ico()}" sizes="any">
+<link rel="icon" href="{icon('favicon-32.png')}" sizes="32x32" type="image/png">
 <link rel="apple-touch-icon" href="{icon('icon-180.png')}">
 <link rel="stylesheet" href="/style.css">
 """
 
 def header(code, folder, native, d, page=''):
     return f"""<header class="top">
-  <a class="brand" href="/{folder}"><img src="{icon('icon-64.png')}" alt="" width="32" height="32"><span>Snowboarding</span></a>
+  <a class="brand" href="/{folder}"><img src="{icon('icon-64.png')}" alt="" width="32" height="32"><span>{e(store_name(code))}</span></a>
   <nav><a href="/{folder}support.html">{e(d['foot_support'])}</a><a href="/{folder}privacy.html">{e(d['foot_privacy'])}</a>
   <details class="langs"><summary aria-label="{a(d['lang_label'])}">{e(native)}</summary><div>{lang_menu(code, page)}</div></details></nav>
 </header>
@@ -110,20 +120,26 @@ def build(code, folder, hl, ogl, ck, native, d):
     url = BASE + folder
     mail = MAIL + '?subject=' + urllib.parse.quote(d['notify_subject'], safe='')
     name = re.sub(r'[\s:：]+$', '', d['h1a'])
-    app_ld = {"@context": "https://schema.org", "@type": "MobileApplication", "name": "Snowboarding",
-              "alternateName": "Snowboarding: Lessons & Game", "url": url, "inLanguage": hl, "description": d['desc'],
+    app_ld = {"@context": "https://schema.org", "@type": "MobileApplication", "name": store_name(code),
+              "url": url, "inLanguage": hl, "description": d['desc'],
               "applicationSubCategory": "Snowboarding lessons and riding game", "operatingSystem": "iOS 18 or later",
               "applicationCategory": "SportsApplication", "image": BASE + "assets/icon.png",
               "screenshot": [BASE + "assets/game.jpg"],
               "author": {"@type": "Person", "name": "Vladimir Dyagay"}}
     ld = json.dumps(app_ld, ensure_ascii=False).replace('</', '<\\/')
-    # One day on the mountain, one film for every language: the line over it is the lesson's own name.
-    # The rail's colors climb like piste colors, as the lessons get harder.
-    rail = ''.join(
-        f'<li style="flex:{end - at:.2f}"><button type="button" data-at="{at}" data-line="{a(title(ck, d))}" aria-label="{a(title(ck, d))}" style="--pole:{pole}"><i></i></button></li>'
-        for (at, end), pole, title in zip(zip([c[0] for c in FILM], [c[0] for c in FILM[1:]] + [FILM_END]), [c[1] for c in FILM], [c[2] for c in FILM]))
-    first = FILM[0][2](ck, d)
-    levels = ''.join(f'<li><b class="pole">{i}</b>{e(app(stem + ".title", ck))}</li>' for i, (stem, _) in enumerate(LEVELS, 1))
+    # The curriculum list doubles as the film's chapters. Levels the film skips are plain text.
+    starts = {stem: at for stem, at in FILM['stages']}
+    def level(i, stem):
+        name = e(app(stem + ".title", ck))
+        pole = f'<b class="pole">{i}</b>'
+        if stem not in starts:
+            return f'<li>{pole}<span>{name}</span></li>'
+        return f'<li><button type="button" data-at="{starts[stem]}">{pole}<span>{name}</span></button></li>'
+    levels = ''.join(level(i, stem) for i, (stem, _) in enumerate(LEVELS, 1))
+    lines = json.dumps([[at, film_line(key, ck, d)] for at, key in FILM['lines']], ensure_ascii=False).replace('</', '<\\/')
+    who = ''.join(f'<div><dt>{e(a_)}</dt><dd>{e(b_)}</dd></div>' for a_, b_ in d['who'])
+    first_stage = e(app(FILM['stages'][0][0] + ".title", ck))
+    first_line = e(film_line(FILM['lines'][0][1], ck, d))
     return head_tags(url, hl, ogl, code, d['title'], d['desc'], alternates()) + f"""<script type="application/ld+json">{ld}</script>
 </head>
 <body>
@@ -133,22 +149,32 @@ def build(code, folder, hl, ogl, ck, native, d):
   <h1><span style="--fit:{fit(name, code)}vw">{e(name)}</span>{e(d['h1b'])}</h1>
   <div class="pitch">
     <p>{e(d['sub'])}</p>
+    <p>{e(d['sub2'])}</p>
     <a class="btn" href="{a(mail)}">{e(d['cta2'])}</a>
   </div>
   <video data-loop muted loop playsinline preload="metadata" poster="{icon('game.jpg')}" aria-label="{a(d['hero_aria'])}" width="640" height="1312"><source src="{icon('game.mp4')}" type="video/mp4"></video>
 </div>
 <div class="run" id="run">
-  <section class="gate"><div class="in">
-    <h2>{e(d['c_h2'])}</h2>
-    <ol class="levels">{levels}</ol>
-  </div></section>
-  <section class="film" aria-label="{a(d['g_h2'])}">
-    <div class="screen">
-      <video data-loop data-film muted loop playsinline preload="metadata" poster="{icon('film.jpg')}" width="1280" height="720"><source src="{icon('film.mp4')}" type="video/mp4"></video>
-      <p class="line">{e(first)}</p>
+  <div class="columns">
+    <div class="copy">
+      <section class="who">
+        <h2>{e(d['who_h'])}</h2>
+        <dl>{who}</dl>
+      </section>
+      <section class="plan">
+        <h2>{e(d['c_h2'])}</h2>
+        <p class="lead">{e(d['c_lead'])}</p>
+        <ol class="levels">{levels}</ol>
+        <p class="game">{e(d['game_line'])}</p>
+      </section>
     </div>
-    <ol class="rail">{rail}</ol>
-  </section>
+    <div class="screen" role="group" aria-label="{a(d['g_h2'])}">
+      <video data-loop data-film muted loop playsinline preload="metadata" poster="{icon('film.jpg')}" width="640" height="1312"><source src="{icon('film.mp4')}" type="video/mp4"></video>
+      <p class="stage">{first_stage}</p>
+      <p class="line">{first_line}</p>
+    </div>
+  </div>
+  <script type="application/json" id="film-lines">{lines}</script>
 </div>
 </main>
 """ + footer(folder, d)
@@ -178,7 +204,7 @@ def build_doc(kind, code, folder, hl, ogl, native, d, X):
 """ + footer(folder, d)
 
 def check(code, d):
-    need = ['title','desc','lang_label','h1a','h1b','sub','cta2','notify_subject','hero_aria','g_h2','c_h2','foot','foot_support','foot_privacy']
+    need = ['sub2','who_h','who','game_line','c_lead','title','desc','lang_label','h1a','h1b','sub','cta2','notify_subject','hero_aria','g_h2','c_h2','foot','foot_support','foot_privacy']
     miss = [k for k in need if k not in d]
     assert not miss, (code, miss)
 
