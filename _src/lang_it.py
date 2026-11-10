@@ -5,7 +5,7 @@ D = dict(
  h1a="Snowboard da zero", h1b="Capisci i movimenti prima di scendere in pista",
  sub="Guardare e leggere aiutano a capire la tecnica. Qui in più guidi tu il rider: provi un movimento, vedi il risultato e puoi cambiare qualcosa. Questo ciclo di azione, feedback e nuovo tentativo aiuta a capire un movimento. L’abilità vera l’app non la crea: a fare il movimento col corpo si impara sulla neve.",
  sub2="Sposta il peso, cambia lamina, piega le gambe e vedi subito come reagisce la tavola: dove ha girato, come sono cambiate velocità e direzione. Puoi rallentare il movimento, provare in modi diversi e confrontare il risultato. Così i dettagli diventano più chiari: cosa fare, perché, come si muove il corpo e come reagisce la tavola.",
- cta1="Scopri i percorsi", cta2="Avvisami all’uscita", notify_subject="Snowboard: avvisatemi quando esce l’app",
+ cta1="Scopri i percorsi", cta2="Avvisami all’uscita", notify_subject="Feelturn: avvisatemi quando esce l’app",
  soon="In arrivo sull’App Store. Acquisto unico, nessun abbonamento.",
  why_h="Cosa cambia rispetto alle videolezioni", short="Qui il rider lo guidi tu: sposta il peso, cambia lamina e vedi subito come reagisce la tavola.",
  who_h="Per chi è", who=[("Principianti","Arrivare in montagna con meno paura, capendo già le basi e la meccanica della tavola e sapendo a cosa fare attenzione nel corpo e nei movimenti."),("Chi sa già scendere","Mettere ordine nella tua esperienza e notare gli errori: i movimenti sbagliati diventano abitudini e smettiamo di accorgercene. Capire le curve concatenate e le basi del carving, e intanto fare qualche discesa nel gioco.")],

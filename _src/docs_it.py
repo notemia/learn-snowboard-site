@@ -1,6 +1,6 @@
 P = dict(
- title="Snowboard: informativa sulla privacy", desc="Informativa sulla privacy dell’app Snowboard: nessuna raccolta di dati, nessun account, nessuna pubblicità, nessun tracciamento.",
- h1="Snowboard: informativa sulla privacy", sub="In vigore dal 10 novembre 2026",
+ title="Feelturn: informativa sulla privacy", desc="Informativa sulla privacy dell’app Feelturn: nessuna raccolta di dati, nessun account, nessuna pubblicità, nessun tracciamento.",
+ h1="Feelturn: informativa sulla privacy", sub="In vigore dal 10 novembre 2026",
  short_label="In breve",
  short="L’app non raccoglie dati personali. Tutto ciò che segni e scrivi resta sul tuo iPhone. Nessun account, pubblicità, analisi o tracciamento. L’app funziona offline.",
  sections=[
@@ -15,9 +15,9 @@ P = dict(
  contact_h="Contatti",
 )
 S = dict(
- title="Snowboard: assistenza", desc="Assistenza per l’app Snowboard e domande frequenti.",
- h1="Snowboard: assistenza", sub="Rispondiamo entro 48 ore",
- cards=[("Scrivici","Domande, errori, suggerimenti","Invia un’e-mail","Snowboard"),("Segnala un errore","Indica il modello di iPhone e la versione di iOS","Segnala","Snowboard: segnalazione di errore")],
+ title="Feelturn: assistenza", desc="Assistenza per l’app Feelturn e domande frequenti.",
+ h1="Feelturn: assistenza", sub="Rispondiamo entro 48 ore",
+ cards=[("Scrivici","Domande, errori, suggerimenti","Invia un’e-mail","Feelturn"),("Segnala un errore","Indica il modello di iPhone e la versione di iOS","Segnala","Feelturn: segnalazione di errore")],
  faq_h="Domande frequenti",
  faq=[("Da dove comincio?","Apri la scheda «Lezioni» e parti dal livello uno: regole in pista, come cadere e rialzarsi. I livelli suggeriscono un ordine."),
   ("Come guido la pallina inclinando il telefono?","Nelle lezioni sulle curve scegli «Prova tu», attiva «Controlla inclinando il telefono» e tocca «Via». Tieni il telefono in piano, come una piccola tavola: bordo superiore in avanti per le punte, verso di te per i talloni. Puoi guidare anche con il dito."),

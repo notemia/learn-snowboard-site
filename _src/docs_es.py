@@ -1,6 +1,6 @@
 P = dict(
- title="Snowboard: política de privacidad", desc="Política de privacidad de la app Snowboard: no recoge datos, no hay cuenta, ni anuncios, ni seguimiento.",
- h1="Snowboard: política de privacidad", sub="En vigor desde el 10 de noviembre de 2026",
+ title="Feelturn: política de privacidad", desc="Política de privacidad de la app Feelturn: no recoge datos, no hay cuenta, ni anuncios, ni seguimiento.",
+ h1="Feelturn: política de privacidad", sub="En vigor desde el 10 de noviembre de 2026",
  short_label="En breve",
  short="La app no recoge datos personales. Todo lo que marcas y escribes se queda en tu iPhone. No hay cuenta, anuncios, analíticas ni seguimiento. La app funciona sin conexión.",
  sections=[
@@ -15,9 +15,9 @@ P = dict(
  contact_h="Contacto",
 )
 S = dict(
- title="Snowboard: soporte", desc="Soporte de la app Snowboard y preguntas frecuentes.",
- h1="Snowboard: soporte", sub="Respondemos en un máximo de 48 horas",
- cards=[("Escríbenos","Preguntas, errores, sugerencias","Enviar correo","Snowboard"),("Informar de un error","Indica el modelo de iPhone y la versión de iOS","Informar","Snowboard: informe de error")],
+ title="Feelturn: soporte", desc="Soporte de la app Feelturn y preguntas frecuentes.",
+ h1="Feelturn: soporte", sub="Respondemos en un máximo de 48 horas",
+ cards=[("Escríbenos","Preguntas, errores, sugerencias","Enviar correo","Feelturn"),("Informar de un error","Indica el modelo de iPhone y la versión de iOS","Informar","Feelturn: informe de error")],
  faq_h="Preguntas frecuentes",
  faq=[("¿Por dónde empiezo?","Abre la pestaña «Lecciones» y empieza por el nivel uno: normas en pista, cómo caer y cómo levantarse. Los niveles sugieren un orden."),
   ("¿Cómo llevo la bola inclinando el móvil?","En las lecciones de giros elige «Hazlo tú», activa «Controlar inclinando el móvil» y pulsa «Empezar». Sujeta el móvil plano, como una tabla pequeña: la parte superior hacia delante para las puntas, hacia ti para los talones. También puedes manejarlo con el dedo."),

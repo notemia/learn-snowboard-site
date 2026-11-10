@@ -1,6 +1,6 @@
 P = dict(
- title="Snowboarding: Privacy Policy", desc="Snowboarding privacy policy: no data collection, no account, no ads, no tracking.",
- h1="Snowboarding: Privacy Policy", sub="Effective November 10, 2026",
+ title="Feelturn: Privacy Policy", desc="Feelturn privacy policy: no data collection, no account, no ads, no tracking.",
+ h1="Feelturn: Privacy Policy", sub="Effective November 10, 2026",
  short_label="In short",
  short="The app does not collect personal data. Everything you mark and write stays on your iPhone. No account, no ads, no analytics, no tracking. The app works offline.",
  sections=[
@@ -15,9 +15,9 @@ P = dict(
  contact_h="Contact",
 )
 S = dict(
- title="Snowboarding: Support", desc="Snowboarding support and frequently asked questions.",
- h1="Snowboarding: Support", sub="We reply within 48 hours",
- cards=[("Contact us","Questions, bugs, feedback","Send email","Snowboarding"),("Report a bug","Include your iPhone model and iOS version","Report","Snowboarding bug report")],
+ title="Feelturn: Support", desc="Feelturn support and frequently asked questions.",
+ h1="Feelturn: Support", sub="We reply within 48 hours",
+ cards=[("Contact us","Questions, bugs, feedback","Send email","Feelturn"),("Report a bug","Include your iPhone model and iOS version","Report","Feelturn bug report")],
  faq_h="Frequently asked questions",
  faq=[("Where do I start?","Open the Lessons tab and start with level one: the rules on the slope and how to fall and get up. The levels suggest an order."),
   ("How do I steer the ball by tilting the phone?","In the turn lessons choose “Ride it yourself”, turn on “Control with phone tilt” and press Start. Hold the phone flat like a small board: tip the top away from you for toes, toward you for heels. You can also steer with a finger."),

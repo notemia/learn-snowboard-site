@@ -1,6 +1,6 @@
 P = dict(
- title="Snowboard: Datenschutzerklärung", desc="Datenschutzerklärung der App Snowboard: keine Datenerfassung, kein Konto, keine Werbung, kein Tracking.",
- h1="Snowboard: Datenschutzerklärung", sub="Gültig seit 10. November 2026",
+ title="Feelturn: Datenschutzerklärung", desc="Datenschutzerklärung der App Feelturn: keine Datenerfassung, kein Konto, keine Werbung, kein Tracking.",
+ h1="Feelturn: Datenschutzerklärung", sub="Gültig seit 10. November 2026",
  short_label="Kurz gesagt",
  short="Die App erfasst keine personenbezogenen Daten. Alles, was du markierst und aufschreibst, bleibt auf deinem iPhone. Kein Konto, keine Werbung, keine Analyse, kein Tracking. Die App funktioniert offline.",
  sections=[
@@ -15,9 +15,9 @@ P = dict(
  contact_h="Kontakt",
 )
 S = dict(
- title="Snowboard: Support", desc="Support für die App Snowboard und häufige Fragen.",
- h1="Snowboard: Support", sub="Wir antworten innerhalb von 48 Stunden",
- cards=[("Schreib uns","Fragen, Fehler, Feedback","E-Mail senden","Snowboard"),("Fehler melden","Gib dein iPhone-Modell und die iOS-Version an","Melden","Snowboard: Fehlermeldung")],
+ title="Feelturn: Support", desc="Support für die App Feelturn und häufige Fragen.",
+ h1="Feelturn: Support", sub="Wir antworten innerhalb von 48 Stunden",
+ cards=[("Schreib uns","Fragen, Fehler, Feedback","E-Mail senden","Feelturn"),("Fehler melden","Gib dein iPhone-Modell und die iOS-Version an","Melden","Feelturn: Fehlermeldung")],
  faq_h="Häufige Fragen",
  faq=[("Wo fange ich an?","Öffne den Tab „Lektionen“ und beginne mit Level 1: Pistenregeln, Fallen und Aufstehen. Die Level geben eine Reihenfolge vor."),
   ("Wie steuere ich die Kugel durch Neigen des Handys?","Wähle in den Schwung-Lektionen „Selbst fahren“, schalte „Mit Handy-Neigung steuern“ ein und tippe auf „Start“. Halte das Handy flach wie ein kleines Board: Oberkante weg von dir für die Zehen, zu dir hin für die Fersen. Mit dem Finger kannst du auch steuern."),

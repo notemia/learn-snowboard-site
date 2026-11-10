@@ -1,6 +1,6 @@
 P = dict(
- title="Snowboard : politique de confidentialité", desc="Politique de confidentialité de l’appli Snowboard : aucune collecte de données, ni compte, ni publicité, ni suivi.",
- h1="Snowboard : politique de confidentialité", sub="En vigueur depuis le 10 novembre 2026",
+ title="Feelturn : politique de confidentialité", desc="Politique de confidentialité de l’appli Feelturn : aucune collecte de données, ni compte, ni publicité, ni suivi.",
+ h1="Feelturn : politique de confidentialité", sub="En vigueur depuis le 10 novembre 2026",
  short_label="En bref",
  short="L’appli ne collecte aucune donnée personnelle. Tout ce que tu notes et écris reste sur ton iPhone. Pas de compte, de publicité, d’analyse d’usage ni de suivi. L’appli fonctionne hors ligne.",
  sections=[
@@ -15,9 +15,9 @@ P = dict(
  contact_h="Contact",
 )
 S = dict(
- title="Snowboard : assistance", desc="Assistance de l’appli Snowboard et questions fréquentes.",
- h1="Snowboard : assistance", sub="Nous répondons sous 48 heures",
- cards=[("Écris-nous","Questions, bugs, suggestions","Envoyer un e-mail","Snowboard"),("Signaler un bug","Indique ton modèle d’iPhone et ta version d’iOS","Signaler","Snowboard : signalement de bug")],
+ title="Feelturn : assistance", desc="Assistance de l’appli Feelturn et questions fréquentes.",
+ h1="Feelturn : assistance", sub="Nous répondons sous 48 heures",
+ cards=[("Écris-nous","Questions, bugs, suggestions","Envoyer un e-mail","Feelturn"),("Signaler un bug","Indique ton modèle d’iPhone et ta version d’iOS","Signaler","Feelturn : signalement de bug")],
  faq_h="Questions fréquentes",
  faq=[("Par où commencer ?","Ouvre l’onglet « Leçons » et commence par le niveau un : les règles sur les pistes, comment tomber et se relever. Les niveaux suggèrent un ordre."),
   ("Comment guider la bille en inclinant le téléphone ?","Dans les leçons sur les virages, choisis « À toi de rider », active « Piloter en inclinant le téléphone » et touche « Go ». Tiens le téléphone à plat comme une petite planche : bord supérieur vers l’avant pour les orteils, vers toi pour les talons. Tu peux aussi piloter au doigt."),

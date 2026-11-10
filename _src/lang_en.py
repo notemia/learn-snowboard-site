@@ -5,7 +5,7 @@ D = dict(
  h1a="Snowboarding from scratch", h1b="Understand the moves before your first day on the slope",
  sub="Watching and reading help you understand technique. Here you also control the rider yourself: you try a move, see the result and can change something. This loop of action, feedback and another try helps you understand a move. The app doesn’t build the skill itself: you learn to do the move with your body, on snow.",
  sub2="Shift your weight, change edges, bend your knees and see right away how the board reacts: where it turned, how speed and direction changed. You can slow the move down, try it in different ways and compare the result. The details get clearer: what to do, why, and how the body moves and the board reacts.",
- cta1="See the courses", cta2="Tell me when it’s out", notify_subject="Snowboarding: tell me when it is out",
+ cta1="See the courses", cta2="Tell me when it’s out", notify_subject="Feelturn: tell me when it is out",
  soon="Coming soon to the App Store. One-time purchase, no subscription.",
  why_h="How it's different from video lessons", short="Here you control the rider yourself: shift your weight, change edges and see right away how the board reacts.",
  who_h="Who it's for", who=[("Beginners","Get to the mountain with less fear, already understanding the basics and the mechanics of riding, and knowing what to focus on in your body and movement."),("Intermediate riders","Make sense of what you already do and spot your mistakes: wrong movements turn into habits, and we stop noticing them. Figure out linked turns and the basics of carving, and take a few runs in the game.")],
