@@ -5,7 +5,7 @@ Run:  python3 _src/build.py   (from the repo root)
 Course names, level names and lesson names come from the app's own string
 catalog, so the site always says exactly what the app says.
 """
-import hashlib, html, json, importlib, os, re, sys, urllib.parse
+import datetime, hashlib, html, json, importlib, os, re, subprocess, sys, urllib.parse
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 SITE = os.path.dirname(HERE)                    # repo root, served as the site
@@ -57,6 +57,21 @@ FILM = json.load(open(os.path.join(HERE, 'film.json'), encoding='utf-8'))
 
 def film_line(key, ck, d):
     return d[key[5:]] if key.startswith('site:') else app(key, ck)
+
+def video_ld(stem, name, description, hl):
+    """schema.org VideoObject for assets/<stem>.mp4, with its real length and date."""
+    path = os.path.join(SITE, 'assets', stem + '.mp4')
+    out = subprocess.run(['ffprobe', '-v', 'error', '-show_entries', 'format=duration', '-of', 'csv=p=0', path],
+                         capture_output=True, text=True).stdout.strip()
+    seconds = round(float(out or 0))
+    # The date it was published: its last commit, or the file's own date before it is committed.
+    git = subprocess.run(['git', '-C', SITE, 'log', '-1', '--format=%cI', '--', 'assets/' + stem + '.mp4'],
+                         capture_output=True, text=True).stdout.strip()
+    when = datetime.datetime.fromisoformat(git) if git else \
+        datetime.datetime.fromtimestamp(os.path.getmtime(path), datetime.timezone.utc).replace(microsecond=0)
+    return {"@context": "https://schema.org", "@type": "VideoObject", "name": name, "description": description,
+            "thumbnailUrl": [BASE + 'assets/' + stem + '.jpg'], "contentUrl": BASE + 'assets/' + stem + '.mp4',
+            "uploadDate": when.isoformat(), "duration": f"PT{seconds // 60}M{seconds % 60}S", "inLanguage": hl}
 
 def icon(name):
     """Icon address tied to the file's content: Cloudflare lets browsers keep images for hours."""
@@ -127,6 +142,9 @@ def build(code, folder, hl, ogl, ck, native, d):
               "screenshot": [BASE + "assets/game.jpg"],
               "author": {"@type": "Person", "name": "Vladimir Dyagay"}}
     ld = json.dumps(app_ld, ensure_ascii=False).replace('</', '<\\/')
+    # The two videos on the page, so search engines can show them with a thumbnail.
+    videos = [video_ld('game', d['hero_aria'], d['hero_aria'], hl), video_ld('film', d['c_h2'], d['c_lead'], hl)]
+    ld_videos = json.dumps(videos, ensure_ascii=False).replace('</', '<\\/')
     # The curriculum list doubles as the film's chapters. Levels the film skips are plain text.
     starts = {stem: at for stem, at in FILM['stages']}
     def level(i, stem):
@@ -141,6 +159,7 @@ def build(code, folder, hl, ogl, ck, native, d):
     first_stage = e(app(FILM['stages'][0][0] + ".title", ck))
     first_line = e(film_line(FILM['lines'][0][1], ck, d))
     return head_tags(url, hl, ogl, code, d['title'], d['desc'], alternates()) + f"""<script type="application/ld+json">{ld}</script>
+<script type="application/ld+json">{ld_videos}</script>
 </head>
 <body>
 {header(code, folder, native, d)}
