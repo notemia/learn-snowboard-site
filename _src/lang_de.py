@@ -8,7 +8,7 @@ D = dict(
  cta1="Strecken ansehen", cta2="Bescheid geben, wenn sie da ist", notify_subject="Snowboard: Bescheid geben, wenn die App da ist",
  soon="Bald im App Store. Einmaliger Kauf, kein Abo.",
  why_h="Der Unterschied zu Lehrvideos", short="Hier steuerst du den Rider selbst: Gewicht verlagern, Kante wechseln und sofort sehen, wie das Board reagiert.",
- who_h="Für wen", who=[("Anfänger","Mit weniger Angst auf den Berg, weil du die Grundlagen und die Mechanik des Fahrens schon verstehst und weißt, worauf du bei Körper und Bewegung achten musst."),("Fortgeschrittene","Deine Erfahrung ordnen und Fehler erkennen: Falsche Bewegungen werden zur Gewohnheit, und wir bemerken sie nicht mehr. Verbundene Schwünge und die Grundlagen des Carvens verstehen und nebenbei im Spiel fahren."),("Wer wenig Zeit hat","Keine teuren Stunden beim Lehrer für Grundlagentheorie ausgeben.")],
+ who_h="Für wen", who=[("Anfänger","Mit weniger Angst auf den Berg, weil du die Grundlagen und die Mechanik des Fahrens schon verstehst und weißt, worauf du bei Körper und Bewegung achten musst."),("Fortgeschrittene","Deine Erfahrung ordnen und Fehler erkennen: Falsche Bewegungen werden zur Gewohnheit, und wir bemerken sie nicht mehr. Verbundene Schwünge und die Grundlagen des Carvens verstehen und nebenbei im Spiel fahren.")],
  game_line="Danach kannst du einfach zum Spaß fahren: ein Spiel mit verschiedenen Strecken in verschiedenen Ländern.",
  facts=[("25","Lektionen"),("9","Strecken"),("9","Sprachen"),("Offline","ohne Konto, ohne Werbung")],
  hero_aria="Spiel: Eine 3D-Riderin fährt verbundene Carving-Schwünge auf der Piste und dann Switch.",

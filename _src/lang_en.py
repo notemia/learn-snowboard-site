@@ -8,7 +8,7 @@ D = dict(
  cta1="See the courses", cta2="Tell me when it’s out", notify_subject="Snowboarding: tell me when it is out",
  soon="Coming soon to the App Store. One-time purchase, no subscription.",
  why_h="How it's different from video lessons", short="Here you control the rider yourself: shift your weight, change edges and see right away how the board reacts.",
- who_h="Who it's for", who=[("Beginners","Get to the mountain with less fear, already understanding the basics and the mechanics of riding, and knowing what to focus on in your body and movement."),("Intermediate riders","Make sense of what you already do and spot your mistakes: wrong movements turn into habits, and we stop noticing them. Figure out linked turns and the basics of carving, and take a few runs in the game."),("Short on time","Don't spend expensive hours with an instructor on basic theory.")],
+ who_h="Who it's for", who=[("Beginners","Get to the mountain with less fear, already understanding the basics and the mechanics of riding, and knowing what to focus on in your body and movement."),("Intermediate riders","Make sense of what you already do and spot your mistakes: wrong movements turn into habits, and we stop noticing them. Figure out linked turns and the basics of carving, and take a few runs in the game.")],
  game_line="Then just ride for fun: a game on different runs in different countries.",
  facts=[("25","lessons"),("9","courses"),("9","languages"),("Offline","no account, no ads")],
  hero_aria="Gameplay: a 3D rider makes linked carved turns down a groomed slope, then rides switch.",

@@ -8,7 +8,7 @@ D = dict(
  cta1="Voir les parcours", cta2="Prévenez-moi à la sortie", notify_subject="Snowboard : prévenez-moi à la sortie de l’appli",
  soon="Bientôt sur l’App Store. Achat unique, sans abonnement.",
  why_h="Ce qui change par rapport aux vidéos de cours", short="Ici, c’est toi qui pilotes le rider : déplace ton poids, change de carre et vois tout de suite comment réagit la planche.",
- who_h="Pour qui", who=[("Débutants","Arriver à la montagne avec moins de peur, en comprenant déjà les bases et la mécanique de la glisse, et en sachant à quoi faire attention dans ton corps et tes mouvements."),("Riders en progression","Mettre de l’ordre dans ton expérience et repérer tes erreurs : les mauvais gestes deviennent des habitudes et on ne les remarque plus. Comprendre les virages enchaînés et les bases du carving, et rider dans le jeu au passage."),("Pour gagner du temps","Ne pas payer des heures de moniteur pour de la théorie de base.")],
+ who_h="Pour qui", who=[("Débutants","Arriver à la montagne avec moins de peur, en comprenant déjà les bases et la mécanique de la glisse, et en sachant à quoi faire attention dans ton corps et tes mouvements."),("Riders en progression","Mettre de l’ordre dans ton expérience et repérer tes erreurs : les mauvais gestes deviennent des habitudes et on ne les remarque plus. Comprendre les virages enchaînés et les bases du carving, et rider dans le jeu au passage.")],
  game_line="Ensuite, place au jeu, pour le plaisir : différentes pistes dans différents pays.",
  facts=[("25","leçons"),("9","parcours"),("9","langues"),("Hors ligne","sans compte ni pub")],
  hero_aria="Jeu : une rideuse en 3D enchaîne des virages coupés sur la piste, puis ride en switch.",

@@ -8,7 +8,7 @@ D = dict(
  cta1="Ver los recorridos", cta2="Avísame cuando salga", notify_subject="Snowboard: avísame cuando salga la app",
  soon="Próximamente en el App Store. Compra única, sin suscripción.",
  why_h="En qué se diferencia de las videoclases", short="Aquí controlas tú al rider: mueve el peso, cambia de canto y mira al momento cómo reacciona la tabla.",
- who_h="Para quién es", who=[("Principiantes","Llegar a la montaña con menos miedo, entendiendo ya lo básico y la mecánica del snowboard, y sabiendo en qué fijarte en el cuerpo y los movimientos."),("Con algo de experiencia","Ordenar tu experiencia y detectar errores: los movimientos incorrectos se convierten en hábitos y dejamos de notarlos. Entender los giros enlazados y lo básico del carving, y de paso bajar en el juego."),("Si quieres ahorrar tiempo","No gastar horas caras con el instructor en teoría básica.")],
+ who_h="Para quién es", who=[("Principiantes","Llegar a la montaña con menos miedo, entendiendo ya lo básico y la mecánica del snowboard, y sabiendo en qué fijarte en el cuerpo y los movimientos."),("Con algo de experiencia","Ordenar tu experiencia y detectar errores: los movimientos incorrectos se convierten en hábitos y dejamos de notarlos. Entender los giros enlazados y lo básico del carving, y de paso bajar en el juego.")],
  game_line="Y luego, a disfrutar del juego: distintas pistas en distintos países.",
  facts=[("25","lecciones"),("9","recorridos"),("9","idiomas"),("Sin conexión","sin cuenta ni anuncios")],
  hero_aria="Juego: una rider en 3D enlaza giros conducidos en la pista y luego baja en switch.",

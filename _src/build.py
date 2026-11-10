@@ -48,16 +48,20 @@ LEGAL_DATE = {'en': 'November 10, 2026', 'ru': '10 ноября 2026 г.', 'de':
               'ja': '2026年11月10日', 'ko': '2026년 11월 10일', 'zh': '2026年11月10日'}
 LEGAL_SECTIONS = ['theory', 'game', 'coach', 'risk', 'stopped', 'liability']
 
-def terms(code, ck):
-    items = ''.join(f'<div><h3>{e(app("legal." + k + ".title", ck))}</h3><p>{e(app("legal." + k + ".body", ck))}</p></div>'
-                    for k in LEGAL_SECTIONS)
+def terms_doc(code, ck, privacy):
+    """The terms page: the same words the app shows before first use."""
+    name = app('settings.legal', ck)
+    brand = re.split(r'\s*[:：]\s*', privacy['h1'])[0]
     version = app('legal.version', ck).replace('%1$d', str(LEGAL_VERSION)).replace('%2$@', LEGAL_DATE[code])
-    return f"""<section class="terms" id="terms">
-  <h2>{e(app('settings.legal', ck))}</h2>
-  <div class="terms-list">{items}</div>
-  <p class="quiet">{e(version)}</p>
-</section>
-"""
+    sections = [(app("legal." + k + ".title", ck), app("legal." + k + ".body", ck)) for k in LEGAL_SECTIONS]
+    # As on the privacy page: the name after the colon starts in lower case where the language does so.
+    head = name[0].lower() + name[1:] if code in ('ru', 'fr', 'es', 'it') else name
+    if code == 'en':
+        head = 'Terms of Use'   # title case, as in "Privacy Policy"
+
+    sep = ' : ' if code == 'fr' else ('：' if code in ('ja', 'zh') else ': ')
+    return dict(title=f"{brand}{sep}{head}", desc=app('legal.theory.body', ck), h1=f"{brand}{sep}{head}", sub=version,
+                lead=app('legal.decline', ck), sections=sections)
 
 LEVELS = [('level.safety', [17, 18]), ('level1', [11, 24, 10, 2, 25]), ('level2', [12, 6]), ('level.lifts', [20, 21]),
           ('level3', [1, 13, 4, 8, 19]), ('level4', [5, 14, 7, 15]), ('level5', [3, 9, 22, 23, 16])]
@@ -141,7 +145,7 @@ def header(code, folder, native, d, page=''):
 def footer(folder, d, ck):
     return f"""<footer>
   <small>{e(d['foot'])}<br>© 2026 Vladimir Dyagay</small>
-  <nav><a href="/{folder}#terms">{e(app('settings.legal', ck))}</a><a href="/{folder}support.html">{e(d['foot_support'])}</a><a href="/{folder}privacy.html">{e(d['foot_privacy'])}</a><a href="https://notemia.app/">Notemia apps</a></nav>
+  <nav><a href="/{folder}terms.html">{e(app('settings.legal', ck))}</a><a href="/{folder}support.html">{e(d['foot_support'])}</a><a href="/{folder}privacy.html">{e(d['foot_privacy'])}</a><a href="https://notemia.app/">Notemia apps</a></nav>
 </footer>
 <script src="/app.js"></script>
 </body>
@@ -232,14 +236,18 @@ def build(code, folder, hl, ogl, ck, native, d):
   <script type="application/json" id="film-lines">{lines}</script>
 </section>
 </div>
-{terms(code, ck)}</main>
+</main>
 """ + footer(folder, d, ck)
 
 def build_doc(kind, code, folder, hl, ogl, native, d, X):
-    """kind: 'privacy' or 'support'. App Store Connect links to these addresses."""
+    """kind: 'privacy', 'support' or 'terms'. App Store Connect links to the first two."""
     page = kind + '.html'
     body = []
-    if kind == 'privacy':
+    if kind == 'terms':
+        for h, p in X['sections']:
+            body.append(f'<h2>{e(h)}</h2><p>{e(p)}</p>')
+        body.append(f'<p class="quiet">{e(X["lead"])}</p>')
+    elif kind == 'privacy':
         body.append(f'<p class="short"><strong>{e(X["short_label"])}</strong> {e(X["short"])}</p>')
         for h, p in X['sections']:
             body.append(f'<h2>{e(h)}</h2><p>{e(p)}</p>')
@@ -285,11 +293,11 @@ def main():
         out = os.path.join(SITE, folder, 'index.html')
         os.makedirs(os.path.dirname(out), exist_ok=True)
         open(out, 'w', encoding='utf-8').write(build(code, folder, hl, ogl, ck, native, d))
-        for kind, X in (('privacy', dm.P), ('support', dm.S)):
+        for kind, X in (('privacy', dm.P), ('support', dm.S), ('terms', terms_doc(code, ck, dm.P))):
             open(os.path.join(SITE, folder, kind + '.html'), 'w', encoding='utf-8').write(build_doc(kind, code, folder, hl, ogl, native, d, X))
         print('wrote', os.path.relpath(out, ROOT))
     blocks = ''
-    for pg in ('', 'privacy.html', 'support.html'):
+    for pg in ('', 'privacy.html', 'support.html', 'terms.html'):
         alts = ''.join(f'    <xhtml:link rel="alternate" hreflang="{h}" href="{BASE}{f}{pg}"/>\n' for _, f, h, *_ in LANGS) + f'    <xhtml:link rel="alternate" hreflang="x-default" href="{BASE}{pg}"/>\n'
         blocks += ''.join(f'  <url><loc>{BASE}{f}{pg}</loc>\n{alts}  </url>\n' for _, f, *_ in LANGS)
     head = '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">\n'

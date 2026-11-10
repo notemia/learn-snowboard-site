@@ -8,7 +8,7 @@ D = dict(
  cta1="Scopri i percorsi", cta2="Avvisami all’uscita", notify_subject="Snowboard: avvisatemi quando esce l’app",
  soon="In arrivo sull’App Store. Acquisto unico, nessun abbonamento.",
  why_h="Cosa cambia rispetto alle videolezioni", short="Qui il rider lo guidi tu: sposta il peso, cambia lamina e vedi subito come reagisce la tavola.",
- who_h="Per chi è", who=[("Principianti","Arrivare in montagna con meno paura, capendo già le basi e la meccanica della tavola e sapendo a cosa fare attenzione nel corpo e nei movimenti."),("Chi sa già scendere","Mettere ordine nella tua esperienza e notare gli errori: i movimenti sbagliati diventano abitudini e smettiamo di accorgercene. Capire le curve concatenate e le basi del carving, e intanto fare qualche discesa nel gioco."),("Chi vuole risparmiare tempo","Non spendere ore costose col maestro per la teoria di base.")],
+ who_h="Per chi è", who=[("Principianti","Arrivare in montagna con meno paura, capendo già le basi e la meccanica della tavola e sapendo a cosa fare attenzione nel corpo e nei movimenti."),("Chi sa già scendere","Mettere ordine nella tua esperienza e notare gli errori: i movimenti sbagliati diventano abitudini e smettiamo di accorgercene. Capire le curve concatenate e le basi del carving, e intanto fare qualche discesa nel gioco.")],
  game_line="E poi puoi divertirti col gioco: piste diverse in paesi diversi.",
  facts=[("25","lezioni"),("9","percorsi"),("9","lingue"),("Offline","senza account né pubblicità")],
  hero_aria="Gioco: una rider in 3D collega curve in conduzione sulla pista e poi scende in switch.",
