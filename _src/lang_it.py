@@ -63,7 +63,7 @@ D = dict(
   ("Quando esce e come funziona l’acquisto?","L’app è in preparazione per l’App Store. Funziona con un acquisto unico, senza abbonamento. I dettagli saranno sulla sua pagina dell’App Store.")],
  end_h2="Capisci la curva. Poi provala.",
  end_p="In arrivo sull’App Store. Acquisto unico, nessun abbonamento.",
- foot="Modelli semplificati e un gioco. Usa l’app solo da fermo e impara i nuovi movimenti sulla neve con un maestro.",
+ foot="Modelli semplificati e un gioco: l’app non ti insegna ad andare in tavola e non sostituisce un maestro. Usala solo da fermo. In pista vai a tuo rischio.",
  foot_support="Assistenza", foot_privacy="Privacy",
  g_eyebrow="Nell’app", g_h2="Uno sguardo all’interno",
 )

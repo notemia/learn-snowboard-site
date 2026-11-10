@@ -144,8 +144,8 @@ def header(code, folder, native, d, page=''):
 
 def footer(folder, d, ck):
     return f"""<footer>
-  <small>{e(d['foot'])}<br>© 2026 Vladimir Dyagay</small>
-  <nav><a href="/{folder}terms.html">{e(app('settings.legal', ck))}</a><a href="/{folder}support.html">{e(d['foot_support'])}</a><a href="/{folder}privacy.html">{e(d['foot_privacy'])}</a><a href="https://notemia.app/">Notemia apps</a></nav>
+  <small>{e(d['foot'])} <a class="terms-link" href="/{folder}terms.html">{e(app('settings.legal', ck))}</a><br>© 2026 Vladimir Dyagay</small>
+  <nav><a href="/{folder}support.html">{e(d['foot_support'])}</a><a href="/{folder}privacy.html">{e(d['foot_privacy'])}</a><a href="https://notemia.app/">Notemia apps</a></nav>
 </footer>
 <script src="/app.js"></script>
 </body>

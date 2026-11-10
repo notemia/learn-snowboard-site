@@ -172,3 +172,5 @@ footer nav { display: flex; gap: 1.5rem; font-size: .9375rem; }
   .btn:hover { transform: none; }
 }
 
+
+footer .terms-link { color: inherit; text-decoration: underline; text-underline-offset: .15em; white-space: nowrap; }
