@@ -1,6 +1,6 @@
 P = dict(
  title="Snowboard: política de privacidad", desc="Política de privacidad de la app Snowboard: no recoge datos, no hay cuenta, ni anuncios, ni seguimiento.",
- h1="Snowboard: política de privacidad", sub="En vigor desde el 3 de noviembre de 2026",
+ h1="Snowboard: política de privacidad", sub="En vigor desde el 10 de noviembre de 2026",
  short_label="En breve",
  short="La app no recoge datos personales. Todo lo que marcas y escribes se queda en tu iPhone. No hay cuenta, anuncios, analíticas ni seguimiento. La app funciona sin conexión.",
  sections=[
@@ -9,6 +9,7 @@ P = dict(
   ("Compra","La compra única la gestiona Apple. Nunca recibimos tus datos de pago, y la app solo sabe si se ha comprado la versión completa."),
   ("Lo que no hacemos","No recogemos, vendemos ni compartimos datos personales. La app no incluye SDK de terceros, anuncios ni analíticas. No realiza peticiones de red por su cuenta."),
   ("Eliminar tus datos","«Ajustes» → «Restablecer el historial» borra tu progreso o todos los datos de práctica. Al eliminar la app se borran del dispositivo todos sus datos."),
+  ("Aceptación de las condiciones de uso","Cuando aceptas las condiciones de uso, la app guarda en tu dispositivo qué versión aceptaste y cuándo, para volver a preguntarte si cambian. Este dato nunca sale del dispositivo. Las condiciones están en la página principal de este sitio y en la app, en Ajustes → Condiciones de uso."),
   ("Menores","La app está pensada para adultos principiantes y no recoge datos de nadie."),
   ("Cambios","Si esta política cambia, la nueva versión se publicará en esta dirección con una fecha nueva.")],
  contact_h="Contacto",
@@ -27,6 +28,7 @@ S = dict(
   ("¿Cómo quito el sonido?","El modo silencio del iPhone silencia los sonidos del juego, y en la pestaña «Juego» → «Sonidos del viento y del canto» se desactivan por completo. Tu música sigue sonando."),
   ("¿Cómo averiguo mi postura?","La app pregunta qué pie va delante. Si no estás seguro, elige «Aún no lo sé» y muestra una postura de ejemplo claramente indicada. Puedes cambiarla en «Ajustes». La mano con la que escribes no decide tu postura."),
   ("¿La app puntúa mi forma de bajar?","No. Las escenas son modelos didácticos simplificados. La app no usa la cámara y no ve cómo practicas. Completar una lección en la app no significa que puedas hacer el movimiento con seguridad sobre la nieve."),
+  ("¿La app sustituye a un instructor? ¿Quién responde si me lesiono?","No. Las lecciones son teoría con modelos simplificados, y el juego es un juego con física inventada. Aprende los movimientos nuevos en la nieve con un instructor y no copies los saltos ni la velocidad del juego. Practicas bajo tu propia responsabilidad; las condiciones de uso completas están en la página principal y en la app, en Ajustes → Condiciones de uso."),
   ("¿Necesito internet?","No. Todo el contenido está dentro de la app y no hace falta cuenta."),
   ("¿Cómo cambio el idioma?","«Ajustes» → «Idioma»: el del sistema o uno de los nueve disponibles. Se aplica al instante."),
   ("¿Cómo restablezco mi progreso?","«Ajustes» → «Restablecer el historial». Puedes restablecer solo el progreso o todo."),

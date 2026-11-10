@@ -1,6 +1,6 @@
 P = dict(
  title="Snowboarding: Privacy Policy", desc="Snowboarding privacy policy: no data collection, no account, no ads, no tracking.",
- h1="Snowboarding: Privacy Policy", sub="Effective November 3, 2026",
+ h1="Snowboarding: Privacy Policy", sub="Effective November 10, 2026",
  short_label="In short",
  short="The app does not collect personal data. Everything you mark and write stays on your iPhone. No account, no ads, no analytics, no tracking. The app works offline.",
  sections=[
@@ -9,6 +9,7 @@ P = dict(
   ("Purchase","The one-time purchase is handled by Apple. We never receive your payment details, and the app only learns whether the full version has been bought."),
   ("What we do not do","We do not collect, sell or share personal data. The app has no third-party SDKs, ads or analytics. It makes no network requests of its own."),
   ("Deleting your data","Settings → Reset practice history removes your progress or all practice data. Deleting the app removes all of its data from the device."),
+  ("Accepting the terms of use","When you accept the terms of use, the app stores on your device which version of the terms you accepted and when, so it can ask again if the terms change. This record never leaves the device. The terms are on the main page of this site and in the app under Settings → Terms of use."),
   ("Children","The app is made for adult beginners and does not collect data about anyone."),
   ("Changes","If this policy changes, the new version will be published at this address with a new date.")],
  contact_h="Contact",
@@ -27,6 +28,7 @@ S = dict(
   ("How do I turn off the sound?","The iPhone’s silent mode mutes the game’s sounds, and Game tab → Wind and edge sounds turns them off. Your music keeps playing."),
   ("How do I find my stance?","The app asks which foot leads. If you’re not sure, choose “I don’t know yet” and it shows an example stance, clearly labeled. You can change it in Settings. Your writing hand doesn’t decide your stance."),
   ("Does the app rate my riding?","No. The scenes are simplified teaching models. The app doesn’t use the camera and can’t see how you ride. Finishing a lesson in the app doesn’t mean you can do the move safely on snow."),
+  ("Does the app replace an instructor? Who is responsible if I get hurt?","No. The lessons are theory on simplified models, and the game is a game with invented physics. Learn new moves on snow with an instructor, and don’t copy the game’s jumps or speeds. You ride at your own risk; the full terms of use are on the main page and in the app under Settings → Terms of use."),
   ("Do I need the internet?","No. All content is built into the app, and no account is needed."),
   ("How do I change the language?","Settings → Language: system default or one of nine languages. It applies immediately."),
   ("How do I reset my progress?","Settings → Reset practice history. You can reset progress only, or everything."),

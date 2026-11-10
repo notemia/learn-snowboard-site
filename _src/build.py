@@ -38,6 +38,27 @@ STR = json.load(open(CATALOG, encoding='utf-8'))['strings']
 def app(key, ck):
     return STR[key]['localizations'][ck]['stringUnit']['value']
 
+# The terms of use the app asks every user to accept, word for word from the app's catalog.
+# The version number comes from the app's code; raise it there when the terms change.
+LEGAL_SWIFT = os.path.join(os.path.dirname(os.path.dirname(os.path.dirname(CATALOG))),
+                           'SnowboardFeelTheTurn', 'Models', 'LegalConsent.swift')
+LEGAL_VERSION = int(re.search(r'currentVersion = (\d+)', open(LEGAL_SWIFT, encoding='utf-8').read()).group(1))
+LEGAL_DATE = {'en': 'November 10, 2026', 'ru': '10 ноября 2026 г.', 'de': '10. November 2026',
+              'fr': '10 novembre 2026', 'es': '10 de noviembre de 2026', 'it': '10 novembre 2026',
+              'ja': '2026年11月10日', 'ko': '2026년 11월 10일', 'zh': '2026年11月10日'}
+LEGAL_SECTIONS = ['theory', 'game', 'coach', 'risk', 'stopped', 'liability']
+
+def terms(code, ck):
+    items = ''.join(f'<div><h3>{e(app("legal." + k + ".title", ck))}</h3><p>{e(app("legal." + k + ".body", ck))}</p></div>'
+                    for k in LEGAL_SECTIONS)
+    version = app('legal.version', ck).replace('%1$d', str(LEGAL_VERSION)).replace('%2$@', LEGAL_DATE[code])
+    return f"""<section class="terms" id="terms">
+  <h2>{e(app('settings.legal', ck))}</h2>
+  <div class="terms-list">{items}</div>
+  <p class="quiet">{e(version)}</p>
+</section>
+"""
+
 LEVELS = [('level.safety', [17, 18]), ('level1', [11, 24, 10, 2, 25]), ('level2', [12, 6]), ('level.lifts', [20, 21]),
           ('level3', [1, 13, 4, 8, 19]), ('level4', [5, 14, 7, 15]), ('level5', [3, 9, 22, 23, 16])]
 assert sum(len(l) for _, l in LEVELS) == 25
@@ -117,10 +138,10 @@ def header(code, folder, native, d, page=''):
 </header>
 """
 
-def footer(folder, d):
+def footer(folder, d, ck):
     return f"""<footer>
   <small>{e(d['foot'])}<br>© 2026 Vladimir Dyagay</small>
-  <nav><a href="/{folder}support.html">{e(d['foot_support'])}</a><a href="/{folder}privacy.html">{e(d['foot_privacy'])}</a><a href="https://notemia.app/">Notemia apps</a></nav>
+  <nav><a href="/{folder}#terms">{e(app('settings.legal', ck))}</a><a href="/{folder}support.html">{e(d['foot_support'])}</a><a href="/{folder}privacy.html">{e(d['foot_privacy'])}</a><a href="https://notemia.app/">Notemia apps</a></nav>
 </footer>
 <script src="/app.js"></script>
 </body>
@@ -211,8 +232,8 @@ def build(code, folder, hl, ogl, ck, native, d):
   <script type="application/json" id="film-lines">{lines}</script>
 </section>
 </div>
-</main>
-""" + footer(folder, d)
+{terms(code, ck)}</main>
+""" + footer(folder, d, ck)
 
 def build_doc(kind, code, folder, hl, ogl, native, d, X):
     """kind: 'privacy' or 'support'. App Store Connect links to these addresses."""
@@ -236,7 +257,7 @@ def build_doc(kind, code, folder, hl, ogl, native, d, X):
   <p class="quiet">{e(X['sub'])}</p>
   {''.join(body)}
 </main>
-""" + footer(folder, d)
+""" + footer(folder, d, next(l[4] for l in LANGS if l[0] == code))
 
 def check(code, d):
     need = ['why_h','short','sub2','who_h','who','game_line','c_lead','title','desc','lang_label','h1a','h1b','sub','cta2','notify_subject','hero_aria','g_h2','c_h2','foot','foot_support','foot_privacy']
@@ -250,10 +271,10 @@ def lang_menu(code, page=''):
 def check_doc(code, P, S):
     for k in ['title','desc','h1','sub','short_label','short','sections','contact_h']:
         assert k in P, (code, 'P', k)
-    assert len(P['sections']) == 7, (code, len(P['sections']))
+    assert len(P['sections']) == 8, (code, len(P['sections']))
     for k in ['title','desc','h1','sub','cards','faq']:
         assert k in S, (code, 'S', k)
-    assert len(S['cards']) == 2 and len(S['faq']) == 13, (code, len(S['faq']))
+    assert len(S['cards']) == 2 and len(S['faq']) == 14, (code, len(S['faq']))
 
 def main():
     for code, folder, hl, ogl, ck, native in LANGS:

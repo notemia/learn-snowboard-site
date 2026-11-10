@@ -1,6 +1,6 @@
 P = dict(
  title="Snowboard: Datenschutzerklärung", desc="Datenschutzerklärung der App Snowboard: keine Datenerfassung, kein Konto, keine Werbung, kein Tracking.",
- h1="Snowboard: Datenschutzerklärung", sub="Gültig seit 3. November 2026",
+ h1="Snowboard: Datenschutzerklärung", sub="Gültig seit 10. November 2026",
  short_label="Kurz gesagt",
  short="Die App erfasst keine personenbezogenen Daten. Alles, was du markierst und aufschreibst, bleibt auf deinem iPhone. Kein Konto, keine Werbung, keine Analyse, kein Tracking. Die App funktioniert offline.",
  sections=[
@@ -9,6 +9,7 @@ P = dict(
   ("Kauf","Der einmalige Kauf wird von Apple abgewickelt. Wir erhalten deine Zahlungsdaten nie, und die App erfährt nur, ob die Vollversion gekauft wurde."),
   ("Was wir nicht tun","Wir erfassen, verkaufen oder teilen keine personenbezogenen Daten. Die App enthält keine SDKs von Drittanbietern, keine Werbung und keine Analyse. Sie stellt keine eigenen Netzwerkanfragen."),
   ("Daten löschen","Unter „Einstellungen“ → „Trainingsverlauf zurücksetzen“ löschst du deinen Fortschritt oder alle Trainingsdaten. Wenn du die App löschst, werden alle ihre Daten vom Gerät entfernt."),
+  ("Annahme der Nutzungsbedingungen","Wenn du die Nutzungsbedingungen akzeptierst, speichert die App auf deinem Gerät, welche Fassung du wann akzeptiert hast, damit sie erneut fragen kann, wenn sich die Bedingungen ändern. Diese Angabe verlässt das Gerät nie. Die Bedingungen stehen auf der Startseite dieser Website und in der App unter Einstellungen → Nutzungsbedingungen."),
   ("Kinder","Die App richtet sich an erwachsene Anfänger und erfasst keine Daten über irgendjemanden."),
   ("Änderungen","Wenn sich diese Erklärung ändert, wird die neue Fassung unter dieser Adresse mit neuem Datum veröffentlicht.")],
  contact_h="Kontakt",
@@ -27,6 +28,7 @@ S = dict(
   ("Wie schalte ich den Ton aus?","Der Stumm-Modus des iPhone schaltet die Spielgeräusche stumm, und unter Tab „Spiel“ → „Wind- und Kantengeräusche“ schaltest du sie ganz aus. Deine Musik läuft weiter."),
   ("Wie finde ich meinen Stand heraus?","Die App fragt, welcher Fuß vorne steht. Wenn du es nicht sicher weißt, wähle „Weiß ich noch nicht“, dann zeigt sie einen klar gekennzeichneten Beispielstand. In den Einstellungen kannst du ihn ändern. Deine Schreibhand bestimmt den Stand nicht."),
   ("Bewertet die App mein Fahren?","Nein. Die Szenen sind vereinfachte Lernmodelle. Die App nutzt die Kamera nicht und sieht nicht, wie du fährst. Eine in der App geschaffte Lektion heißt nicht, dass du die Bewegung auf Schnee sicher beherrschst."),
+  ("Ersetzt die App einen Lehrer? Wer haftet, wenn ich mich verletze?","Nein. Die Lektionen sind Theorie an vereinfachten Modellen, und das Spiel ist ein Spiel mit erfundener Physik. Lerne neue Bewegungen auf Schnee mit einem Lehrer und ahme Sprünge und Tempo aus dem Spiel nicht nach. Du fährst auf eigenes Risiko; die vollständigen Nutzungsbedingungen stehen auf der Startseite und in der App unter Einstellungen → Nutzungsbedingungen."),
   ("Brauche ich Internet?","Nein. Alle Inhalte sind in der App enthalten, ein Konto ist nicht nötig."),
   ("Wie ändere ich die Sprache?","„Einstellungen“ → „Sprache“: Systemsprache oder eine von neun Sprachen. Die Änderung gilt sofort."),
   ("Wie setze ich meinen Fortschritt zurück?","„Einstellungen“ → „Trainingsverlauf zurücksetzen“. Du kannst nur den Fortschritt oder alles zurücksetzen."),

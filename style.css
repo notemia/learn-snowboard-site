@@ -171,3 +171,10 @@ footer nav { display: flex; gap: 1.5rem; font-size: .9375rem; }
   .btn, .rows summary::after { transition: none; }
   .btn:hover { transform: none; }
 }
+
+/* Terms of use: the same text the app asks every user to accept. */
+.terms { padding: 3rem var(--right) 3rem var(--gutter); border-top: 1px solid var(--shadow); }
+.terms-list { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1.25rem clamp(1.5rem, 4vw, 3rem); margin: 1rem 0 1.25rem; }
+.terms h3 { font: 700 1.125rem/1.25 var(--display); margin: 0 0 .3rem; }
+.terms p { margin: 0; color: var(--ink-2); line-height: 1.45; }
+@media (max-width: 860px) { .terms-list { grid-template-columns: 1fr; } .terms { padding-top: 2.25rem; } }
