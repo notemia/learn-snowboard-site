@@ -63,7 +63,7 @@ D = dict(
   ("When is it out, and how does it work?","The app is being prepared for the App Store. It works on a one-time purchase, with no subscription. Details will be on its App Store page.")],
  end_h2="Understand the turn. Then try it.",
  end_p="Coming soon to the App Store. One-time purchase, no subscription.",
- foot="Simplified models and a game: the app doesn’t teach you to ride and doesn’t replace an instructor. Use it only when stopped. On the slope, you ride at your own risk.",
+ foot="Simplified models and a game: the app doesn’t replace an instructor or lessons on the slope. Use it only when stopped. You ride at your own risk.",
  foot_support="Support", foot_privacy="Privacy",
  g_eyebrow="In the app", g_h2="A look inside",
 )
