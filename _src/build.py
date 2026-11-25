@@ -76,6 +76,7 @@ def fit(word, code):
     return round(92 / (len(word) * per_char), 1)
 
 MAIL = 'mailto:helpyoutofeel@gmail.com'
+APPSTORE = 'https://apps.apple.com/app/feelturn/id6829510513'
 
 # The film: every caption is the app's own text, so one video serves all languages.
 FILM = json.load(open(os.path.join(HERE, 'film.json'), encoding='utf-8'))
@@ -158,7 +159,6 @@ def alternates(page=''):
 
 def build(code, folder, hl, ogl, ck, native, d):
     url = BASE + folder
-    mail = MAIL + '?subject=' + urllib.parse.quote(d['notify_subject'], safe='')
     name = re.sub(r'[\s:：]+$', '', d['h1a'])
     app_ld = {"@context": "https://schema.org", "@type": "MobileApplication", "name": store_name(code),
               "url": url, "inLanguage": hl, "description": d['desc'],
@@ -193,7 +193,7 @@ def build(code, folder, hl, ogl, ck, native, d):
   <h1><span style="--fit:{fit(name, code)}vw">{e(name)}</span>{e(d['h1b'])}</h1>
   <div class="pitch">
     <p>{e(d['short'])}</p>
-    <a class="btn" href="{a(mail)}">{e(d['cta2'])}</a>
+    <a class="btn" href="{APPSTORE}">{e(d['cta2'])}</a>
   </div>
   <video data-loop muted loop playsinline preload="metadata" poster="{icon('game.jpg')}" aria-label="{a(d['hero_aria'])}" width="640" height="1312"><source src="{icon('game.mp4')}" type="video/mp4"></video>
 </div>
